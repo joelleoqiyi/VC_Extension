@@ -2,7 +2,8 @@
 A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconference/webinar.
 
 ## Directory: 
-src/client -> client related stuff aka things to be uploaded to Google Chrome Extensions 
+### src/client
+client related stuff aka things to be uploaded to Google Chrome Extensions 
 - src/client/popup.html is the html for the popup at the side when users click the icon
 - src/client/popup.js is the js for popup.html, it should be where the speech-to-text, text-to-speech is at? 
 - src/client/content.js is the js which will be injected into the current site. (dont think we need this for now)
@@ -10,5 +11,6 @@ src/client -> client related stuff aka things to be uploaded to Google Chrome Ex
 
 ---
 
-src/server -> server related stuff
+### src/server
+server related stuff
 - src/server/index.js is where the main logic of the server is at 
