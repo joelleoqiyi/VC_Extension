@@ -16,4 +16,11 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 ## Dependencies:
 Run `npm install` to download the current dependencies (when you see new dependencies added) 
 - Socket.io
-- Express 
+- Express
+- Babel
+    * You might need to uninstall and reinstall `babel-cli` and `babel-core` if you experience any errors with babel (especially, if you previously installed it in global)
+        * To uninstall babel-cli, `npm uninstall babel-cli -g`
+        * To uninstall babel-core, `npm uninstall babel-core -g`
+        * To reinstall/install babel-cli, `npm uninstall babel-cli -g`
+        * To reinstall/install babel-core, `npm uninstall babel-core -g`
+- Parcel (you might need to run `npm install -g parcel`) 
