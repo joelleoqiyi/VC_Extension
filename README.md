@@ -29,7 +29,7 @@ Run `npm install` to download the current dependencies (when you see new depende
 ---
 
 ## Dev Steps: 
-- Run `npm run build` to build **all** files within the `src` folder
+- Run `npm run build` to build **ALL** files within the `src` folder
 - Run `npm run build_server` to build all server-end files 
 - Run `npm run build_client` to build all client-end files
-- Run `npm run dev_server` to launch the local development server (for server-end)  
+- Run `npm run serve` to **ALL** files and launch the server at `dist/server/index.js`
