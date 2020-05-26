@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/joelleoqiyi/VC_Extension/issues"
   },
-  "homepage": "https://github.com/joelleoqiyi/VC_Extension#readme"
+  "homepage": "https://github.com/joelleoqiyi/VC_Extension#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
 }
