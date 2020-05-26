@@ -1,0 +1,19 @@
+{
+  "name": "vc_extension",
+  "version": "1.0.0",
+  "description": "A Google Chrome Extension tool which enables Q&A anytime during a videoconference/webinar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelleoqiyi/VC_Extension.git"
+  },
+  "author": "Chen Shuo, Eric, Joel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelleoqiyi/VC_Extension/issues"
+  },
+  "homepage": "https://github.com/joelleoqiyi/VC_Extension#readme"
+}
