@@ -24,4 +24,12 @@ Run `npm install` to download the current dependencies (when you see new depende
         * To reinstall/install babel-cli, `npm uninstall babel-cli -g`
         * To reinstall/install babel-core, `npm uninstall babel-core -g`
 - Parcel 
-    * You might need to run `npm install -g parcel` (if you never installed it before) 
+    * You might need to run `npm install -g parcel` (if you never installed it before)
+
+---
+
+## Dev Steps: 
+- Run `npm run build` to build **all** files within the `src` folder
+- Run `npm run build_server` to build all server-end files 
+- Run `npm run build_client` to build all client-end files
+- Run `npm run dev_server` to launch the local development server (for server-end)  

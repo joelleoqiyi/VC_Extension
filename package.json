@@ -4,11 +4,11 @@
   "description": "A Google Chrome Extension tool which enables Q&A anytime during a videoconference/webinar.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev_server": "parcel src/server/index.js",
-    "build": "parcel build src/client/* src/server/* --out-dir dist",
-    "build_client": "parcel build src/client/* --out-dir dist/client",
-    "build_server": "parcel build src/server/* --out-dir dist/server"
+    "test": "echo 'Joel is the best'",
+    "build": "npx babel src --out-dir dist",
+    "build_client": "npx babel src/client --out-dir dist/client",
+    "build_server": "npx babel src/server --out-dir dist/server",
+    "serve": "npm run build && node dist/server/index.js"
   },
   "repository": {
     "type": "git",

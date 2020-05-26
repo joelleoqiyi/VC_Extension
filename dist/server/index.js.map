@@ -1,1 +1,0 @@
-{"version":3,"sources":["server/index.js"],"names":["map","value","console","log"],"mappings":";AAAA,CAAC,EAAG,EAAG,GAAGA,IAAI,SAACC,GAAUC,OAAAA,QAAQC,IAAI,iBAAkBF","file":"index.js","sourceRoot":"../src","sourcesContent":["[1, 2, 3].map((value) => console.log(\"Mapping value \", value));\n\n"]}
