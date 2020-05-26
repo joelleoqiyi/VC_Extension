@@ -14,5 +14,6 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 ---
 
 ## Dependencies:
+Run `npm install` to download the current dependencies (when you see new dependencies added) 
 - Socket.io
 - Express 
