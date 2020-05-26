@@ -23,4 +23,5 @@ Run `npm install` to download the current dependencies (when you see new depende
         * To uninstall babel-core, `npm uninstall babel-core -g`
         * To reinstall/install babel-cli, `npm uninstall babel-cli -g`
         * To reinstall/install babel-core, `npm uninstall babel-core -g`
-- Parcel (you might need to run `npm install -g parcel`) 
+- Parcel 
+    * You might need to run `npm install -g parcel` (if you never installed it before) 
