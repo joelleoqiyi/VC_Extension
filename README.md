@@ -14,9 +14,5 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 ---
 
 ## Dependencies:
-### src/client:
-- ... smth
-
-### src/server 
 - Socket.io
 - Express 
