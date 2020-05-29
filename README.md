@@ -14,6 +14,8 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
     * - [ ] use socket.io to establish connection with server (giving the key the first time opened) (means on server side we need to keeptrack userID and key pairing hmm..)
     * - [ ] use speech-to-text to get user's words after he click the microphone button
     * - [ ] if speaker is on PRO then socket.io connection might send in a user's un-answered question (through the same popup.html popup thing) it should be possible to automatically make the extension popout and then display a number on the icon (should not be so hard) to tell the user how many people have un-answered questions  
+- [ ] content.js 
+    * - [ ] use content.js to inject js into the google meet (**need to discuss** how often to check for new transcripts, etc coz we dont want duplicate transcripts, also need to discuss how often to send the message to the server (or just do it whenever there is a new transcript addition?), also need to check if there are other people talking so like check only if `you` is the username aka only send the transcript which belongs to the speaker) ~~lets ignore that multiple speaker can exist for now lol~~
 - [ ] server.js/index.js:
     * - [ ] use socket.io to establish connection 
     * - [ ] use sql/nosql to keep data on: 
