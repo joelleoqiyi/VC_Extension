@@ -18,7 +18,7 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
     * - [ ] use socket.io to establish connection 
     * - [ ] use sql/nosql to keep data on: 
         * - [ ] userID - key pairing data (also need to leave a slot/column for the speaker UserID)
-        * - [ ] script of speaker (if any) + additional script from the scamming of google meet's transcript, etc (do we keep in a seperate column or same column @Eric )
+        * - [ ] script of speaker (if any) + additional script from the scamming of google meet's transcript, etc (do we keep in a seperate column or same column)
         * - [ ] data model??? not really sure 
     * - [ ] use npm AI thing to train the model whenever a new request from the speaker connection comes in with new data on the transcript 
     * some random notes: 
