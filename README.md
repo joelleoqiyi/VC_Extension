@@ -28,7 +28,10 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
             * if speaker check for input type or something: (either extra transcript or just a normal request?)
             * if participant check for normal request 
                 * then check for speaker if speaker is using PRO, if yes then send the un-answerable question to the speaker through socket.io (double connection power UWU) 
-  
+
+Alternatives way forward: 
+1) Do the AI processing on the server 
+2) Do the AI processing on the client 
 --- 
 
 ## Directory: 
