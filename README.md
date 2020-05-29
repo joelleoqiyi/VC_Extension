@@ -1,6 +1,34 @@
 # VC_Extension
 A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconference/webinar.
 
+## TO-DOs:
+- [ ] text-to-speech/google's own transcript (hack it or do it the tactiq way)
+- [ ] figure out the how to use the npm AI thing 
+- [ ] figure out how to use AI to make complete sentences from incomplete sentences
+- [ ] popup.html (basically the thing that is shown when the user clicks the icon 
+    * - [ ] microphone button 
+    * - [ ] some place to display questions (from users to speaker in PRO mode)
+    * - [ ] some place to display answers + accuracy score? (to participants, especially when our AI cannot formulate full sentences with the answer from the Q&A bot) 
+- [ ] popup.js/background.js (dont really know which one is suitable for these):
+    * - [ ] use local storage to store the key (for the Q&A) in the person's localstorage so that each time he opens up dont need to keep entering the key but delete it after a few days 
+    * - [ ] use socket.io to establish connection with server (giving the key the first time opened) (means on server side we need to keeptrack userID and key pairing hmm..)
+    * - [ ] use speech-to-text to get user's words after he click the microphone button
+    * - [ ] if speaker is on PRO then socket.io connection might send in a user's un-answered question (through the same popup.html popup thing) idk. if it is possible to automatically make the extension popout (prob can) but if cannot then just display a number on the icon (should not be so hard) to tell the user how many people have un-answered questions  
+- [ ] server.js/index.js:
+    * - [ ] use socket.io to establish connection 
+    * - [ ] use sql/nosql to keep data on: 
+        * - [ ] userID - key pairing data (also need to leave a slot/column for the speaker UserID)
+        * - [ ] script of speaker (if any) + additional script from the scamming of google meet's transcript, etc (do we keep in a seperate column or same column @Eric )
+        * - [ ] data model??? not really sure 
+    * - [ ] use npm AI thing to train the model whenever a new request from the speaker connection comes in with new data on the transcript 
+    * some random notes: 
+        * whenever a new connection comes in check if userID is participant or speaker.
+            * if speaker check for input type or something: (either extra transcript or just a normal request?)
+            * if participant check for normal request 
+                * then check for speaker if speaker is using PRO, if yes then send the un-answerable question to the speaker through socket.io (double connection power UWU) 
+  
+--- 
+
 ## Directory: 
 ### src/client
 - src/client/popup.html is the html for the popup at the side when users click the icon
