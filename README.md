@@ -13,7 +13,7 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
     * - [ ] use local storage to store the key (for the Q&A) in the person's localstorage so that each time he opens up dont need to keep entering the key but delete it after a few days 
     * - [ ] use socket.io to establish connection with server (giving the key the first time opened) (means on server side we need to keeptrack userID and key pairing hmm..)
     * - [ ] use speech-to-text to get user's words after he click the microphone button
-    * - [ ] if speaker is on PRO then socket.io connection might send in a user's un-answered question (through the same popup.html popup thing) idk. if it is possible to automatically make the extension popout (prob can) but if cannot then just display a number on the icon (should not be so hard) to tell the user how many people have un-answered questions  
+    * - [ ] if speaker is on PRO then socket.io connection might send in a user's un-answered question (through the same popup.html popup thing) it should be possible to automatically make the extension popout and then display a number on the icon (should not be so hard) to tell the user how many people have un-answered questions  
 - [ ] server.js/index.js:
     * - [ ] use socket.io to establish connection 
     * - [ ] use sql/nosql to keep data on: 
