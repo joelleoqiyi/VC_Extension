@@ -2,3 +2,6 @@
 /dist
 /test
 .env
+/src/server/.cache
+.cache
+/src/client/.cache
