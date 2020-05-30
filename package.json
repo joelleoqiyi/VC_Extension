@@ -8,7 +8,8 @@
     "build": "npx babel src --out-dir dist",
     "build_client": "npx babel src/client --out-dir dist/client",
     "build_server": "npx babel src/server --out-dir dist/server",
-    "serve": "npm run build && node dist/server/index.js"
+    "serve": "npm run build && node dist/server/index.js",
+    "testing":"node dist/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,10 @@
   },
   "homepage": "https://github.com/joelleoqiyi/VC_Extension#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.8.7"
+    "@babel/polyfill": "^7.8.7",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.5.8",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
