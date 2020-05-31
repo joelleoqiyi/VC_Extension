@@ -7,7 +7,7 @@ const AssertionError = require('assert').AssertionError;
 let socket = io.connect(
   "http://localhost:3000/rooms",{
   query: {
-    roomToken: "249f9e3",
+    roomToken: "249f93",
     speakerToken: null
   }
 });
@@ -16,6 +16,7 @@ socket.emit("joinRoom");
 socket.on("sucess", (msg) => {console.log(msg);})
 socket.on("newUser", (msg) => {console.log(msg);})
 socket.on("error", (msg)=>{console.log(msg);})
+
 /*
 let socket = io.connect("http://localhost:3000")
 socket.emit("gimmemsg", "gimmmmmeeee msg");
