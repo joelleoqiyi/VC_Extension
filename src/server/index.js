@@ -1,94 +1,57 @@
-//[1, 2, 3].map((value) => console.log("Mapping value ", value));
-//console.log("test");
-//import fs from 'fs'
-/*import {} from './socketcreate'
-test();
-var port = 3000;
-const express = require('express')
-const app = express()
-
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
-
-app.listen(3000, () => console.log(`Example app listening at http://localhost:${port}`))
-*/
-// ----
 import 'babel-polyfill'; //to allow babel to transpile async/await
-const chatrooms = ["a3k5", "4fg6"];
 const express = require("express");
 const app = express();
 const port = 3000;
 const http = require("http").createServer()
 const io = require("socket.io")(http);
-const MongoClient = require('mongodb').MongoClient;
 const assert = require("assert");
-import {testdb} from './db';
-import {uri} from './config';
+import {queryDocument, deleteDocument, newDocument, updateDocument, newIndex} from './db';
 
 
 
+/*
 (async () => {
-  let hello = await testdb(uri);
-  await console.log(hello);
-})();
-/*
-async function finDB(){
-  const uri = "mongodb+srv://6vMgDwr0U6ieKiX:IxWdJ9IcEBqrHNW@vcxtension-v7tcr.mongodb.net/test?retryWrites=true&w=majority";
-  const client = new MongoClient(uri, { useNewUrlParser: true });
-  setTimeout(()=>{console.log("client is closing?");}, 5000);
-  const hello = await client.connect(err => {
-    const collection = client.db("test").collection("test");
-    // perform actions on the collection object
-    collection.find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
-        console.log("Found the following records");
-        console.log(docs)
-        //callback(docs);
-      });
-    setTimeout(()=>{client.close(); console.log("client is closed");}, 5000);
-    //client.close();
-  });
-  console.log(hello)
-}
+  let hello = await queryDocument("roomData",[{"roomKey": "249f9e3"},{"speaker.sid": "99ijgj9"}], ["speaker.sid","proStatus","roomKey"]);
+  //await deleteDocuments();
+  //let hello = await updateDocument("roomData", {"roomKey": "249f9e3"}, {"speaker.sid": "9i9ijgj9", "proStatus": true});
+  //let hello = await newDocument("roomData",[{"sid":"858030","token":"r55m4m3","initialised":false},'249f9e3',null, false])
+  //let hello = await deleteDocuments([{"roomKey":"249f9e3d"}])
+  //let hello = await newIndex("roomData", [{"roomKey": 1}])
+  //await console.log(typeof hello);
+  await console.log(hello === null?"null is good": hello.speaker.sid)
+})().catch(err => console.error(err));
 */
-//finDB();
 
-/*const connectionString = 'mongodb+srv://6vMgDwr0U6ieKiX:IxWdJ9IcEBqrHNW@vcxtension-v7tcr.mongodb.net/test?retryWrites=true&w=majority';
 
-(async () => {
-        let client = await MongoClient.connect(connectionString,
-            { useNewUrlParser: true });
 
-        let db = client.db('test');
-        try {
-           const res = await db.collection("test").find({}).toArray(); //returns a promise :)
-           /*function(err, docs) {
-               assert.equal(err, null);
-               console.log("Found the following records");
-               console.log(docs)
-               //callback(docs);
-            }*/
-/*
-           console.log(`res => ${JSON.stringify(res)}`);
-           console.log("hello");
-        }
-        finally {
-            client.close();
-        }
-    })()
-        .catch(err => console.error(err));
-*/
-/*io.use((socket, next) => {
-  let token = socket.handshake.query.token;
-  console.log(token);
-  return next(new Error("hello"));
-});*/
-/*
-io.of("/games").on("connection", (socket) => {
-  socket.emit("hello", "hello from the other side");
+
+io.use((socket, next) => {
+  let roomToken = socket.handshake.query.roomToken === ("null" || null)
+                     ? null
+                     : socket.handshake.query.roomToken;
+  if (roomToken !== null){
+    (async ()=>{
+      let res = await queryDocument(
+        "roomData",[{"roomKey": roomToken}],["roomKey", "speaker.token"]
+      );
+      if (res && res.roomKey === roomToken){
+        return next()
+      } else {
+        return next(new Error("Room Token Invalid"));
+      }
+    })().catch(err => console.error(err));
+  } else {
+    return next(new Error("Room Token Empty"))
+  }
+});
+
+io.of("/rooms").on("connection", (socket) => {
+  let roomToken = socket.handshake.query.roomToken || null;
   console.log("new client connected");
-  socket.on("joinRoom", (room) => {
+  socket.join(roomToken);
+  socket.emit("sucess", 1);
+  io.of('/rooms').to(roomToken).emit("newUser", roomToken);
+  /*socket.on("joinRoom", (room) => {
     if (chatrooms.includes(room)){
       socket.join(room);
       io.of("/games").to(room).emit("newUser", "new user joined games UWU");
@@ -96,14 +59,14 @@ io.of("/games").on("connection", (socket) => {
     } else {
       socket.emit("error", "no room name");
     }
-  });
-  socket.on("test", (msg) => {
+  });*/
+  /*socket.on("test", (msg) => {
     socket.username = msg;
     console.log(socket.username); //can set your own socket.username since it is a dictionary uwu
     socket.emit("testsuccess", "working");
-  });
+  });*/
 });
-*/
+
 /*
 const teststorage = []
 io.on("connection", (socket) => {
@@ -114,9 +77,8 @@ io.on("connection", (socket) => {
     io.to(teststorage[0]).emit("greetings", "hello");
   });
 })
-
+*/
 
 http.listen(port, () => {
   console.log("listening to port 3000")
 });
-*/
