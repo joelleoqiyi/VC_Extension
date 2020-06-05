@@ -1,4 +1,4 @@
-# VC_Extension
+## VC_Extension
 A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconference/webinar.
 
 ## TO-DOs:
@@ -66,3 +66,4 @@ Run `npm install` to download the current dependencies (when you see new depende
 - Run `npm run build_server` to build all server-end files 
 - Run `npm run build_client` to build all client-end files
 - Run `npm run serve` to **ALL** files and launch the server at `dist/server/index.js`
+

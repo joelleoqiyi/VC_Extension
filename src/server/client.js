@@ -7,16 +7,34 @@ const AssertionError = require('assert').AssertionError;
 let socket = io.connect(
   "http://localhost:3000/rooms",{
   query: {
-    roomToken: "249f93",
+    roomToken: "249f9e3",
     speakerToken: null
   }
 });
 
-socket.emit("joinRoom");
-socket.on("sucess", (msg) => {console.log(msg);})
+//socket.emit("joinRoom");
+socket.on("successHandshake", (msg) => {
+        console.log(msg);
+})
+socket.emit("checkStatus");
 socket.on("newUser", (msg) => {console.log(msg);})
 socket.on("error", (msg)=>{console.log(msg);})
+socket.on("queryFailed", (msg)=>{console.log(msg);})
+socket.on("proStatusFailed", (msg)=>{console.log(msg);})
+socket.on("proStatusCleared",(msg)=>{console.log(msg);})
+/*
+let sockets = io.connect(
+  "http://localhost:3000/rooms",{
+  query: {
+    roomToken: "gjej396",
+    speakerToken: null
+  }
+});
 
+sockets.on("successHandshake", (msg) => {
+        console.log(msg);
+})
+*/
 /*
 let socket = io.connect("http://localhost:3000")
 socket.emit("gimmemsg", "gimmmmmeeee msg");
