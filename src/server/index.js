@@ -1,6 +1,6 @@
 //importing neccessary functions from other supporting files
 import 'babel-polyfill'; //to allow babel to transpile async/await
-import {queryDocument, deleteDocument, newDocument, updateDocument} from './misc/db';
+import {queryDocument, updateDocument} from './misc/db';
 import {port} from './misc/config'
 import {createRoom} from './route/createRoom'
 
@@ -116,7 +116,7 @@ io.of("/rooms").on("connection", (socket) => {
         }
     );
     console.log(`\(PASS\) initHandshakeCleared`);
-  })().catch(err => console.error(`Error during HandShake: ${err}`));
+  })().catch(err => console.error(`\(ERROR\) Error during HandShake: ${err}`));
 
   socket.on("escalationRequest", ([proStatus, escalation])=>{
     if (!proStatus || !escalation) {
