@@ -16,6 +16,7 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 - src/server/misc/date.js: date function
 - src/server/misc/config.js: access env variables
 - src/server/misc/token.js: create roomToken, speakerToken
+- src/server/misc/clean.js: maintaining and cleaning database
 - src/server/route/createRoom.js: routing for creating new rooms
 - src/server/CLIENT\_TEST/\*: testing files for client-end (example usage of server events) 
 
