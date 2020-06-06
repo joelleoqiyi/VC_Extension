@@ -1,11 +1,3 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require("assert");
-import {uri} from './config'
-import {getCurrDate} from './date'
-import "babel-polyfill";
-
-//.catch(err => console.error(err));
-
 /* ---------------database document structure--------------------
 vcxtension
     |_ VCX
@@ -18,8 +10,18 @@ vcxtension
             |_ transcript (string)
             |_ proStatus (bool)
             |_ expirationDate (string)
-*/
+----------------------------------------------------------------*/
 
+//importing neccessary functions from supporting files
+import {uri} from './config'
+import {getCurrDate} from './date'
+import "babel-polyfill";
+
+//declaring variables, npm packages
+const MongoClient = require('mongodb').MongoClient;
+const assert = require("assert");
+
+//database functions
 async function connectRemote(){
   let client = await MongoClient.connect(uri, { useNewUrlParser: true });
   return client;
