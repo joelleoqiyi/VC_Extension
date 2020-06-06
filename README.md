@@ -66,5 +66,6 @@ Run `npm install` to download the current dependencies (when you see new depende
 - Run `npm run build_client` to build all client-end files
 - Run `npm run serve` to build **ALL** files and launch the server at `dist/server/index.js`
 - Run `npm run clean` to set up crontab for maintaining database
+    * if you have an existing crontab running and don't want to have the chance of overriding it. open up `package.json` and insert `crontab -l > mycron &&` in front of the script for `npm run clean`
 - Run `npm run serve_prod` for launching server (for production) :heart_eyes:
 
