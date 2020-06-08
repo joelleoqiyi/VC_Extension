@@ -9,7 +9,7 @@ const assert = require("assert");
 
 //database functions
 async function connectRemote(){
-  let client = await MongoClient.connect(uri, { useNewUrlParser: true });
+  let client = await MongoClient.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true });
   return client;
 }
 

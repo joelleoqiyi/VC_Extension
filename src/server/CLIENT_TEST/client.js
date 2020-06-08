@@ -15,7 +15,7 @@ let socket = io.connect(
   "http://localhost:3000/rooms",{
   query: {
     roomToken: "qKI3dWt",
-    speakerToken: null
+    speakerToken: null 
   }
 });
 

@@ -9,8 +9,9 @@
     "build_client": "npx babel src/client --out-dir dist/client",
     "build_server": "npx babel src/server --out-dir dist/server",
     "serve": "npm run build && node dist/server/index.js",
-    "clean":"echo '0 0 * * * node dist/server/misc/clean.js' >> mycron && crontab mycron && rm mycron",
-    "serve_prod": "npm run build && npm run clean && node dist/server/index.js"
+    "setup_clean":"echo '0 0 * * * node dist/server/misc/clean.js' >> mycron && crontab mycron && rm mycron",
+    "clean": "node dist/server/misc/clean.js",
+    "serve_prod": "npm run build && npm run setup_clean && node dist/server/index.js"
   },
   "repository": {
     "type": "git",
