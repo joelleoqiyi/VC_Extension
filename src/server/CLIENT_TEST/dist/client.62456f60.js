@@ -126,11 +126,11 @@ $('#submitButton').click(function () {
   }, function (data, status) {
     console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
-}); //normal users 
+}); //normal users
 
 var socket = io.connect("http://localhost:3000/rooms", {
   query: {
-    roomToken: "249f9e3",
+    roomToken: "qKI3dWt",
     speakerToken: null
   }
 }); //Example Usage
@@ -190,7 +190,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63108" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56389" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

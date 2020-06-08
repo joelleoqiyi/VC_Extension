@@ -10,12 +10,12 @@ $('#submitButton').click(function(){
     });
 });
 
-//normal users 
+//normal users
 let socket = io.connect(
   "http://localhost:3000/rooms",{
   query: {
-    roomToken: "249f9e3",
-    speakerToken: null 
+    roomToken: "qKI3dWt",
+    speakerToken: null
   }
 });
 
@@ -33,4 +33,3 @@ socket.on("escalationRequestCleared", (msg)=>{console.log(msg)});
 socket.on("escalationRequestSent", (msg)=>{console.log(msg)});
 socket.on("escalationRequestFailed", (msg)=>{console.log(msg)});
 socket.on("checkStatusCleared", (msg)=>{console.log(msg)});
-

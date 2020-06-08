@@ -3,6 +3,7 @@ import 'babel-polyfill'; //to allow babel to transpile async/await
 import {queryDocument, updateDocument} from './misc/db';
 import {port} from './misc/config'
 import {createRoom} from './route/createRoom'
+import {auth, room} from './misc/config'
 
 //declaring variables, npm packages
 const assert = require("assert");
@@ -21,8 +22,8 @@ app.use('/create', createRoom);
 http.listen(port, () => {
   console.log(`listening to port ${port}`)
 });
-
-//socket.io connection listeners 
+console.log(typeof room, room);
+//socket.io connection listeners
 io.use((socket, next) => {
   let roomToken = socket.handshake.query.roomToken === ("null" || null)
                      ? null
@@ -30,7 +31,7 @@ io.use((socket, next) => {
   if (roomToken !== null){
     (async ()=>{
       let res = await queryDocument(
-        "roomData",
+        room,
         [{"roomKey": roomToken}],
         ["roomKey"]
       );
@@ -58,7 +59,7 @@ io.of("/rooms").on("connection", (socket) => {
   socket.join(socket.roomToken);
   (async () => {
     let res = await queryDocument(
-        "roomData",
+        room,
         [{"roomKey": socket.roomToken}],
         ["roomKey", "proStatus", "transcript", "speaker.sid", "speaker.initialised", "speaker.token"]
     );
@@ -67,7 +68,7 @@ io.of("/rooms").on("connection", (socket) => {
         if (socket.speakerToken === res.speaker.token){
             isSpeaker = true;
             let updateRes = await updateDocument(
-                "roomData",
+                room,
                 {"roomKey": socket.roomToken},
                 {
                     "speaker.sid": socket.id,
@@ -141,11 +142,10 @@ io.of("/rooms").on("connection", (socket) => {
          console.log(`\(FAILED\) escalationRequest: escalation invalid argument\n\tescalation: ${escalation}\n\tsocket.id: ${socket.id}`);
       }
       return;
-      // continue;
     }
     (async ()=>{
         let res = await queryDocument(
-            "roomData",
+            room,
             [{"roomKey": socket.roomToken}],
             ["proStatus", "roomKey", "speaker.sid", "speaker.initialised"]
         );
@@ -216,7 +216,7 @@ io.of("/rooms").on("connection", (socket) => {
     }
     (async ()=>{
         let res = await queryDocument(
-            "roomData",
+            room,
             [{"roomKey": socket.roomToken}],
             ["roomKey", "speaker.sid", "speaker.initialised", "transcript"]
         );
@@ -228,7 +228,7 @@ io.of("/rooms").on("connection", (socket) => {
                                    : ""
                 let tobeUpdated = transcript.concat(updateString);
                 let updateRes = await updateDocument(
-                    "roomData",
+                    room,
                     {"roomKey": socket.roomToken},
                     {"transcript": tobeUpdated}
                 );
@@ -289,7 +289,7 @@ io.of("/rooms").on("connection", (socket) => {
     }
     (async ()=>{
         let res = await queryDocument(
-            "roomData",
+            room,
             [{"roomKey": socket.roomToken}],
             ["proStatus", "roomKey"]
         );

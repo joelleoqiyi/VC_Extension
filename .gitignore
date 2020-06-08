@@ -1,7 +1,8 @@
 /node_modules
 /dist
-/test
+/self
 .env
 /src/server/.cache
 .cache
 /src/client/.cache
+/wiki/dbStructure.md

@@ -1,19 +1,5 @@
-/* ---------------database document structure--------------------
-vcxtension
-    |_ VCX
-        |_ roomData
-            |_ speaker
-                  |_ sid (string)
-                  |_ token (string)
-                  |_ initialised (bool)
-            |_ roomKey (string)
-            |_ transcript (string)
-            |_ proStatus (bool)
-            |_ expirationDate (string)
-----------------------------------------------------------------*/
-
 //importing neccessary functions from supporting files
-import {uri} from './config'
+import {uri, dName} from './config'
 import {getCurrDate} from './date'
 import "babel-polyfill";
 
@@ -28,7 +14,7 @@ async function connectRemote(){
 }
 
 async function connectCollection(client, cName){
-  let db = client.db('VCX');
+  let db = client.db(dName);
   let collection = db.collection(cName)
   return {db, collection};
 }

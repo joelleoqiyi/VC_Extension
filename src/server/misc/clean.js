@@ -2,16 +2,17 @@
 import 'babel-polyfill';
 import {deleteDocuments} from './db';
 import {getCurrDate} from './date';
+import {room} from './config'
 
-//executable function. 
+//executable function.
 (async ()=>{
     let DaysToClean = [-1, -2, -3 , -4, -5];
     DaysToClean.forEach((day,i)=>{
         DaysToClean[i] = getCurrDate(day);
     });
     let res = await deleteDocuments(
-        "roomData",
-        [{"expirationDate": {"$in": DaysToClean}}] 
+        room,
+        [{"expirationDate": {"$in": DaysToClean}}]
     );
     if (res !== 1){
         console.log(`\(FAILED\) cleanRequest: res failed to update database\n\tres: ${res}\n\tDaysToClean: ${DaysToClean}`);

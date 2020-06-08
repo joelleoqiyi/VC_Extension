@@ -2,6 +2,7 @@
 import {queryDocument, newDocument} from '../misc/db'
 import {generateToken} from '../misc/token'
 import {getCurrDate} from '../misc/date'
+import {room} from '../misc/config'
 
 //declaring variables, npm packages
 var express = require('express')
@@ -28,14 +29,14 @@ createRoom.use(function timeLog (req, res, next) {
 
 createRoom.post('/', cors(corsOptions), function (req, res) {
   let transcript = req.body.transcript || "";
-  let proStatus = req.body.proStatus || false;
+  let proStatus = (req.body.proStatus === "true") ? true : false;
   (async ()=>{
     let speakerToken = String(generateToken(7));
     let roomToken, queryRes;
     do {
         roomToken = String(generateToken(7));
         queryRes = await queryDocument(
-           "roomData",
+           room,
            [{"roomKey": roomToken}]
         );
     } while (queryRes !== null)
@@ -46,9 +47,9 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             "initialised": false
          },
          roomToken, transcript, proStatus
-    ];    
+    ];
     let newRes = await newDocument(
-        "roomData", newDoc
+        room, newDoc
     );
     if (newRes === 1){
         console.log(`\(PASS\) createRoomCleared`);
