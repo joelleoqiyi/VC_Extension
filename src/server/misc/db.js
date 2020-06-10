@@ -63,9 +63,6 @@ async function newDocument(cName, insertionString){
   const client = await connectRemote();
   try {
     const {db, collection} = await connectCollection(client, cName);
-    /*let insertionString = {speaker, roomKey, transcript, proStatus,
-        expirationDate: getCurrDate(5)
-    }*/
     const res = await collection.insertOne(insertionString);
     ret = res.result.ok;
   } catch (e) {

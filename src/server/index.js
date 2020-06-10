@@ -22,7 +22,6 @@ app.use('/create', createRoom);
 http.listen(port, () => {
   console.log(`listening to port ${port}`)
 });
-console.log(typeof room, room);
 //socket.io connection listeners
 io.use((socket, next) => {
   let roomToken = socket.handshake.query.roomToken === ("null" || null)
