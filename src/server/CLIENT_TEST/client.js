@@ -17,8 +17,8 @@ $('#submitButton').click(function(){
 let socket = io.connect(
   "http://localhost:3000/rooms",{
   query: {
-    roomToken: "qKI3dWt",
-    speakerToken: null 
+    roomToken: "fx7mwBE",
+    speakerToken: "ChMD1qB" 
   }
 });
 

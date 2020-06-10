@@ -19,7 +19,7 @@ async function connectCollection(client, cName){
   return {db, collection};
 }
 
-async function queryDocument(cName, queryArray, projectArray){
+async function queryDocument(cName, queryArray, projectArray, queryOne){
   let ret;
   let projectionArray = {_id: 0};
   const client = await connectRemote();
@@ -34,7 +34,11 @@ async function queryDocument(cName, queryArray, projectArray){
                          ? await queryRes.project(projectionArray)
                          : queryRes;
     const dbRes = await projectRes.toArray()
-    ret = (dbRes.length === 0) ? null : dbRes[0];
+    if (queryOne !== undefined && queryOne === true){
+        ret = (dbRes.length === 0) ? null : dbRes;
+    } else {
+        ret = (dbRes.length === 0) ? null : dbRes[0];
+    }
   } catch (e) {
     console.log(e);
   } finally {
@@ -73,7 +77,7 @@ async function newDocument(cName, insertionString){
   return ret;
 }
 
-async function updateDocument(cName, queryArray, updateArray, pushArray){
+async function updateDocument(cName, queryArray, updateArray, pushArray, pullArray){
   let ret;
   const client = await connectRemote();
   try {
@@ -84,6 +88,9 @@ async function updateDocument(cName, queryArray, updateArray, pushArray){
     }
     if (pushArray !== undefined && pushArray !== null){
         finalUpdateArray["$push"] = pushArray
+    }
+    if (pullArray !== undefined && pullArray !== null){
+        finalUpdateArray["$pull"] = pullArray
     }
     if (Object.keys(finalUpdateArray)){
         const res = await collection.updateOne(queryArray, finalUpdateArray);

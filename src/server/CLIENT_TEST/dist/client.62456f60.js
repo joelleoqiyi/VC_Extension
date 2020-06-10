@@ -132,8 +132,8 @@ $('#submitButton').click(function () {
 
 var socket = io.connect("http://localhost:3000/rooms", {
   query: {
-    roomToken: "qKI3dWt",
-    speakerToken: null
+    roomToken: "fx7mwBE",
+    speakerToken: "ChMD1qB"
   }
 }); //Example Usage
 
@@ -192,7 +192,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54367" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56212" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

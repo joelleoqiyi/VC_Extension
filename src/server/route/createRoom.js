@@ -65,7 +65,8 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             "token": speakerToken,
             "initialised": false
         },
-        roomToken, roomName, transcript, proStatus, 
+        "roomKey": roomToken, 
+        roomName, transcript, proStatus, 
         "expirationDate": getCurrDate(1)
     };
     if (haveUserToken && userToken){
