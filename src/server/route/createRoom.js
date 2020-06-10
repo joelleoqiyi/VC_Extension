@@ -1,8 +1,8 @@
 //importing neccessary functions from supporting files
-import {queryDocument, newDocument} from '../misc/db'
+import {queryDocument, newDocument, updateDocument} from '../misc/db'
 import {generateToken} from '../misc/token'
 import {getCurrDate} from '../misc/date'
-import {room} from '../misc/config'
+import {room, auth} from '../misc/config'
 
 //declaring variables, npm packages
 var express = require('express')
@@ -28,8 +28,27 @@ createRoom.use(function timeLog (req, res, next) {
 })
 
 createRoom.post('/', cors(corsOptions), function (req, res) {
+  let roomName;
   let transcript = req.body.transcript || "";
   let proStatus = (req.body.proStatus === "true") ? true : false;
+  let haveUserToken = (req.body.userToken) ? true : false;
+  let userToken = (haveUserToken && String(req.body.userToken).length === 7)
+                    ? String(req.body.userToken)
+                    : null
+  if (String(req.body.roomName).length > 0 && typeof req.body.roomName === "string"){
+    roomName = String(req.body.roomName);
+  } else { 
+    console.log(`\(FAILED\) createDocument: roomName invalid argument \n\troomName: ${req.body.roomName}`);
+    res.send([
+        "createRoomFailed",
+        {
+            "type": "argumentInvalid",
+            "errorMessage": "roomName argument invalid or empty"
+        }
+    ]);
+    res.end()
+    return;
+  }
   (async ()=>{
     let speakerToken = String(generateToken(7));
     let roomToken, queryRes;
@@ -40,14 +59,60 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
            [{"roomKey": roomToken}]
         );
     } while (queryRes !== null)
-    let newDoc = [
-        {
+    let newDoc = {
+        "speaker": {
             "sid": null,
             "token": speakerToken,
             "initialised": false
-         },
-         roomToken, transcript, proStatus
-    ];
+        },
+        roomToken, roomName, transcript, proStatus, 
+        "expirationDate": getCurrDate(1)
+    };
+    console.log(haveUserToken, userToken, req.body.userToken);
+    if (haveUserToken && userToken){
+        let validateRes = await queryDocument(
+            auth,
+            [{"userToken": userToken}, {"currActiveStatus": true}]
+        );
+        console.log(validateRes);
+        if (validateRes !== null){
+            newDoc.expirationDate = getCurrDate(5);
+            let updateProRes = await updateDocument(
+                auth,
+                {userToken}, 
+                null,
+                {
+                    "currActiveRooms": {
+                        "name": roomName,
+                        roomToken
+                    }
+                }
+            );
+            if (updateProRes === 1){
+                console.log(`\(PASS\) createRoom: updateProAuth`);
+            } else {
+                console.log(`\(FAILED\) createRoom: updateProRes failed to update\n\tres: ${JSON.stringify(updateProRes)}\n\tname: ${roomName}, roomToken: ${roomToken}`); 
+                res.send([
+                    "createRoomFailed",
+                    {
+                        "type": "databaseUpdateFailed",
+                        "errorMessage": "Database failed to update new room"
+                    }
+                ]);
+                return;
+            }
+        } else {
+            console.log(`\(FAILED\) createRoom: userTokenValidation failed\n\tres: ${JSON.stringify(updateProRes)}`);
+            res.send([
+                "createRoomFailed",
+                {
+                    "type": "userTokenValidationFailed",
+                    "errorMessage": "User has failed to authenticate as a PRO user"
+                }
+            ]);
+            return;
+        }
+    }
     let newRes = await newDocument(
         room, newDoc
     );
@@ -60,14 +125,13 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
                 "payload":
                 {
                     "roomToken": roomToken,
-                    "speakerToken": speakerToken,
-                    "transcript": transcript,
-                    "proStatus": proStatus
+                    "roomName": roomName,
+                    "speakerToken": speakerToken
                 }
             }
         ]);
     } else {
-        console.log(`\(FAILED\) createDocument: newRes failed to update\n\tres: ${newRes}\n\tDocument: ${newDoc}`);
+        console.log(`\(FAILED\) createRoom: newRes failed to update\n\tres: ${newRes}\n\tDocument: ${newDoc}`);
         res.send([
             "createRoomFailed",
             {
@@ -75,6 +139,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
                 "errorMessage": "Please try again. Database is not updated with your new room"
             }
         ]);
+        return;
     }
   res.end();
   })().catch(err => console.error(`\(ERROR\) createRoom:\n\t${err}`));

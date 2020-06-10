@@ -58,14 +58,14 @@ async function deleteDocuments(cName, queryArray){
   return ret;
 }
 
-async function newDocument(cName, [speaker, roomKey, transcript, proStatus]){
+async function newDocument(cName, insertionString){
   let ret;
   const client = await connectRemote();
   try {
     const {db, collection} = await connectCollection(client, cName);
-    let insertionString = {speaker, roomKey, transcript, proStatus,
+    /*let insertionString = {speaker, roomKey, transcript, proStatus,
         expirationDate: getCurrDate(5)
-    }
+    }*/
     const res = await collection.insertOne(insertionString);
     ret = res.result.ok;
   } catch (e) {
@@ -76,13 +76,22 @@ async function newDocument(cName, [speaker, roomKey, transcript, proStatus]){
   return ret;
 }
 
-async function updateDocument(cName, queryArray, updateArray){
+async function updateDocument(cName, queryArray, updateArray, pushArray){
   let ret;
   const client = await connectRemote();
   try {
     const {db, collection} = await connectCollection(client, cName);
-    const res = await collection.updateOne(queryArray, {$set: updateArray});
-    ret = res.result.ok;
+    let finalUpdateArray = {}
+    if (updateArray !== undefined && updateArray !== null){
+        finalUpdateArray["$set"] = updateArray;
+    }
+    if (pushArray !== undefined && pushArray !== null){
+        finalUpdateArray["$push"] = pushArray
+    }
+    if (Object.keys(finalUpdateArray)){
+        const res = await collection.updateOne(queryArray, finalUpdateArray);
+        ret = res.result.ok;
+    }
   } catch (e) {
     console.log(e);
   } finally {
