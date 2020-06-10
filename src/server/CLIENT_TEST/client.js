@@ -1,11 +1,21 @@
 //form submission
 $('#submitButton').click(function(){
-    $.post("http://localhost:3000/create",
+   /* $.post("http://localhost:3000/create",
     {
         transcript: "smth... ",
         proStatus: true,
         roomName: "hello world!",
         userToken: "8b8ac63"
+    },
+    function(data, status){
+            console.log(data);
+            //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+    });*/
+        
+   $.post("http://localhost:3000/signin",
+    {
+        "username": "Joel",
+        "password": "12345"
     },
     function(data, status){
             console.log(data);

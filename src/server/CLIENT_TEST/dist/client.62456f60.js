@@ -120,11 +120,20 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"client.js":[function(require,module,exports) {
 //form submission
 $('#submitButton').click(function () {
-  $.post("http://localhost:3000/create", {
-    transcript: "smth... ",
-    proStatus: true,
-    roomName: "hello world!",
-    userToken: "8b8ac63"
+  /* $.post("http://localhost:3000/create",
+   {
+       transcript: "smth... ",
+       proStatus: true,
+       roomName: "hello world!",
+       userToken: "8b8ac63"
+   },
+   function(data, status){
+           console.log(data);
+           //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+   });*/
+  $.post("http://localhost:3000/signin", {
+    "username": "Joel",
+    "password": "12345"
   }, function (data, status) {
     console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
@@ -192,7 +201,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56212" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63824" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
