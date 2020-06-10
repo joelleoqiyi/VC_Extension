@@ -3,10 +3,13 @@ $('#submitButton').click(function(){
     $.post("http://localhost:3000/create",
     {
         transcript: "smth... ",
-        proStatus: true
+        proStatus: true,
+        roomName: "hello world!",
+        userToken: "8b8ac63"
     },
     function(data, status){
-        console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+            console.log(data);
+            //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });
 });
 

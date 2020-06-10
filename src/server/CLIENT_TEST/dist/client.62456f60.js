@@ -122,9 +122,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 $('#submitButton').click(function () {
   $.post("http://localhost:3000/create", {
     transcript: "smth... ",
-    proStatus: true
+    proStatus: true,
+    roomName: "hello world!",
+    userToken: "8b8ac63"
   }, function (data, status) {
-    console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+    console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
 }); //normal users
 
@@ -190,7 +192,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52069" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
