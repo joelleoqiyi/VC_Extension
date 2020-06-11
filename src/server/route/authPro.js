@@ -121,7 +121,6 @@ authPro.post('/logout', cors(corsOptions), function (req, res) {
         [{"userName": username}, {"userPassword": password}, {"userToken": userToken}],
         ["currActiveStatus", "userToken"]
     );
-    //console.log(validateRes)
     if (validateRes !== null && validateRes.currActiveStatus === true && validateRes.userToken === userToken){
         let updateRes = await updateDocument(
             auth,

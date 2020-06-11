@@ -5,6 +5,7 @@ import {port} from './misc/config'
 import {createRoom} from './route/createRoom'
 import {auth, room} from './misc/config'
 import {authPro} from './route/authPro'
+import {dataPro} from './route/dataPro'
 
 //declaring variables, npm packages
 const assert = require("assert");
@@ -21,6 +22,7 @@ const io = require("socket.io")(http);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/create', createRoom);
 app.use('/auth', authPro);
+app.use('./data', dataPro);
 http.listen(port, () => {
   console.log(`listening to port ${port}`)
 });

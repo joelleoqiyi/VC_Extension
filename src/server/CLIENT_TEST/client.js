@@ -12,7 +12,7 @@ $('#submitButton').click(function(){
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });*/
         
-   $.post("http://localhost:3000/auth/signin",
+   $.post("http://localhost:3000/data",
     {
         "username": "Joel",
         "password": "12345",
