@@ -12,11 +12,12 @@ $('#submitButton').click(function(){
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });*/
         
-   $.post("http://localhost:3000/data",
+   $.post("http://localhost:3000/register",
     {
-        "username": "Joel",
+        "username": "Joelleol",
         "password": "12345",
-        "userToken": "dfIVc84"
+        "userToken": "dfIVc84",
+        "paidStatus": true
     },
     function(data, status){
             console.log(data);

@@ -6,6 +6,7 @@ import {createRoom} from './route/createRoom'
 import {auth, room} from './misc/config'
 import {authPro} from './route/authPro'
 import {dataPro} from './route/dataPro'
+import {signUp} from './route/signUp'
 
 //declaring variables, npm packages
 const assert = require("assert");
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/create', createRoom);
 app.use('/auth', authPro);
 app.use('/data', dataPro);
+app.use('/register', signUp);
 http.listen(port, () => {
   console.log(`listening to port ${port}`)
 });

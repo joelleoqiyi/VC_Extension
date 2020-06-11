@@ -1,7 +1,7 @@
 //importing neccessary functions from supporting files
 import {queryDocument} from '../misc/db'
 import {getCurrDate} from '../misc/date'
-import {room, auth} from '../misc/config'
+import {auth} from '../misc/config'
 
 //declaring variables, npm packages
 var express = require('express')
