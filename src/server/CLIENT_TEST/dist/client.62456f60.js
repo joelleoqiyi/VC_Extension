@@ -131,9 +131,10 @@ $('#submitButton').click(function () {
            console.log(data);
            //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
    });*/
-  $.post("http://localhost:3000/signin", {
+  $.post("http://localhost:3000/auth/logout", {
     "username": "Joel",
-    "password": "12345"
+    "password": "12345",
+    "userToken": "clECWBj"
   }, function (data, status) {
     console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
@@ -201,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63824" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51396" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
