@@ -1,5 +1,6 @@
 //importing neccessary functions from supporting files
 import {queryDocument} from '../misc/db'
+import {getCurrDate} from '../misc/date'
 import {room, auth} from '../misc/config'
 
 //declaring variables, npm packages
@@ -74,4 +75,4 @@ dataPro.post('/', cors(corsOptions), function (req, res) {
   })().catch(err => console.error(`\(ERROR\) dataPro logout:\n\t${err}`));
 })
 
-export {authPro}
+export {dataPro}

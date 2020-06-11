@@ -16,7 +16,7 @@ $('#submitButton').click(function(){
     {
         "username": "Joel",
         "password": "12345",
-        "userToken": "clECWBj"
+        "userToken": "dfIVc84"
     },
     function(data, status){
             console.log(data);
