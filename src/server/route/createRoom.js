@@ -146,7 +146,8 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
 
 //easter-egg?
 createRoom.get('/easteregg', cors(), function (req, res) {
-  res.send('Good Morning! Well done! Life is hard, and you just made it harder!');
+    console.log(`\(NEW\) easterEggRequest @ Time: ${getCurrDate(0)}`);
+    res.send(`Good Morning!\n\tEasterEgg created at ${getCurrDate(0)}\n\tWell done! Life is hard, and you just made it harder!`);
 })
 
 export {createRoom};
