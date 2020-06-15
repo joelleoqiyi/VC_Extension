@@ -145,7 +145,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
 })
 
 //easter-egg?
-createRoom.get('/easteregg', cors(corsOptions), function (req, res) {
+createRoom.get('/easteregg', cors(), function (req, res) {
   res.send('Good Morning! Well done! Life is hard, and you just made it harder!');
 })
 
