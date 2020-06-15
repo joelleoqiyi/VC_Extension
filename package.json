@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/server/index.js",
     "test": "echo 'Joel is the best'",
+    "build": "npx babel src --out-dir dist",
     "build_client": "npx babel src/client --out-dir dist/client",
     "build_server": "npx babel src/server --out-dir dist/server",
     "serve": "npm run build && node dist/server/index.js",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/joelleoqiyi/VC_Extension#readme",
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
