@@ -5,5 +5,5 @@ module.exports = {
   auth: process.env.DB_cName_2,
   dName: process.env.DB_dName,
   uri: process.env.DB_URI,
-  port: process.env.PORT
+  port: process.env.PORT || 80
 };

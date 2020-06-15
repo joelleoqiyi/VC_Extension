@@ -9,7 +9,7 @@
     "build_client": "npx babel src/client --out-dir dist/client",
     "build_server": "npx babel src/server --out-dir dist/server",
     "serve": "npm run build && node dist/server/index.js",
-    "setup_clean":"echo '0 0 * * * node dist/server/misc/clean.js' >> mycron && crontab mycron && rm mycron",
+    "setup_clean": "echo '0 0 * * * node dist/server/misc/clean.js' >> mycron && crontab mycron && rm mycron",
     "clean": "node dist/server/misc/clean.js",
     "serve_prod": "npm run build && npm run setup_clean && node dist/server/index.js"
   },
@@ -33,9 +33,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.9.6",
-    "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.1.0",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
   }
