@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node dist/server/index.js",
     "test": "echo 'Joel is the best'",
-    "build": "npx babel src --out-dir dist",
     "build_client": "npx babel src/client --out-dir dist/client",
     "build_server": "npx babel src/server --out-dir dist/server",
     "serve": "npm run build && node dist/server/index.js",
