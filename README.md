@@ -48,7 +48,7 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 ### /data
 - `dataProCleared`: fetching pro data is successful, outputting an array of user's currently active rooms
 - `dataProFailed`: fetch of pro data failed, check value of `type` in response for reason (WEBSITE) 
-### register
+### /register
 - `signUpCleared`: user sucessfully create new PRO account (WEBSITE)
 - `signUpFailed`: user failed to create new PRO account, check value of `type` in response for reason (WEBSITE)
 
