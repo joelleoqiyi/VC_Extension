@@ -120,28 +120,27 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"client.js":[function(require,module,exports) {
 //form submission
 $('#submitButton').click(function () {
-  /*
-  //$.post("https://vcxtension.herokuapp.com/create",
-  $.post("http://localhost:3000/data",
+  $.post("https://vcxtension.herokuapp.com/create", // $.post("http://localhost:3000/create",
   {
-      transcript: "smth... ",
-      proStatus: true,
-      roomName: "hello",
-      userToken: "0fmzYn2"
-  },
-  function(data, status){
-          console.log(data);
-          //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-  });
-  */
-  $.post("http://localhost:3000/data", {
-    "username": "Joelleol",
-    "password": "12345",
-    "userToken": "dfIVc84",
-    "paidStatus": true
+    transcript: "smth... ",
+    proStatus: true,
+    roomName: "hello",
+    userToken: "0fmzYn2"
   }, function (data, status) {
     console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
+  /*     
+  $.post("http://localhost:3000/register",
+   {
+       "username": "Joelleol",
+       "password": "12345",
+       "userToken": "dfIVc84",
+       "paidStatus": true
+   },
+   function(data, status){
+           console.log(data);
+           //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+   });*/
 }); //normal users
 
 var socket = io.connect("https://vcxtension.herokuapp.com/rooms", {
@@ -206,7 +205,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54853" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54264" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

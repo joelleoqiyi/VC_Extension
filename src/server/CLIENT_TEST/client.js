@@ -1,7 +1,8 @@
 //form submission
 $('#submitButton').click(function(){
-    $.post("https://vcxtension.herokuapp.com/create",
-   // $.post("http://localhost:3000/create",
+    /*
+    //$.post("https://vcxtension.herokuapp.com/create",
+    $.post("http://localhost:3000/data",
     {
         transcript: "smth... ",
         proStatus: true,
@@ -12,8 +13,8 @@ $('#submitButton').click(function(){
             console.log(data);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });
-   /*     
-   $.post("http://localhost:3000/register",
+    */    
+   $.post("http://localhost:3000/data",
     {
         "username": "Joelleol",
         "password": "12345",
@@ -23,7 +24,7 @@ $('#submitButton').click(function(){
     function(data, status){
             console.log(data);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-    });*/
+    });
 });
 
 //normal users

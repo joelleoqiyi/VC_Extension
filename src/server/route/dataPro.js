@@ -67,7 +67,7 @@ dataPro.post('/', cors(corsOptions), function (req, res) {
             "dataProFailed",
             {
                 "type": "userValidationFailed",
-                "errorMessage": "user not logged in."
+                "errorMessage": "user not logged in or userToken invalid"
             }
         ]);
     }
