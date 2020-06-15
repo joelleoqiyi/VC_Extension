@@ -73,7 +73,8 @@ Run `npm install` to download the current dependencies (when you see new depende
 
 ---
 
-## Dev Steps: 
+## Dev Steps/Scripts:
+- Run `npm install` to install all the dependencies/Devdependencies
 - Run `npm run start` for running the main index.js
 - Run `npm run build` to build **ALL** files within the `src` folder
 - Run `npm run build_server` to build all server-end files 
