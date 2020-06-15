@@ -50,6 +50,7 @@ var io = require("socket.io")(http); //setting up server "settings"
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(express.json());
 app.use('/create', _createRoom.createRoom);
 app.use('/auth', _authPro.authPro);
 app.use('/data', _dataPro.dataPro);

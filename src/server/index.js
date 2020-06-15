@@ -21,6 +21,7 @@ const io = require("socket.io")(http);
 
 //setting up server "settings"
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use('/create', createRoom);
 app.use('/auth', authPro);
 app.use('/data', dataPro);

@@ -1,17 +1,18 @@
 //form submission
 $('#submitButton').click(function(){
-   /* $.post("http://localhost:3000/create",
+    $.post("https://vcxtension.herokuapp.com/create",
+   // $.post("http://localhost:3000/create",
     {
         transcript: "smth... ",
         proStatus: true,
-        roomName: "hello world!",
-        userToken: "8b8ac63"
+        roomName: "hello",
+        userToken: "0fmzYn2"
     },
     function(data, status){
             console.log(data);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-    });*/
-        
+    });
+   /*     
    $.post("http://localhost:3000/register",
     {
         "username": "Joelleol",
@@ -22,12 +23,12 @@ $('#submitButton').click(function(){
     function(data, status){
             console.log(data);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-    });
+    });*/
 });
 
 //normal users
 let socket = io.connect(
-  "http://localhost:3000/rooms",{
+  "https://vcxtension.herokuapp.com/rooms",{
   query: {
     roomToken: "fx7mwBE",
     speakerToken: "ChMD1qB" 

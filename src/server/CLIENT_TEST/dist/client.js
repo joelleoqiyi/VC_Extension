@@ -120,11 +120,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"client.js":[function(require,module,exports) {
 //form submission
 $('#submitButton').click(function () {
-  //$.post("https://vcxtension.herokuapp.com/create",
-  $.post("http://localhost:3000/create", {
+  $.post("https://vcxtension.herokuapp.com/create", {
     transcript: "smth... ",
     proStatus: true,
-    userToken: "fmzYn2"
+    roomName: "hello world!",
+    userToken: "0fmzYn2"
   }, function (data, status) {
     console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
@@ -142,7 +142,7 @@ $('#submitButton').click(function () {
    });*/
 }); //normal users
 
-var socket = io.connect("https://vcxtension.herokuapp.com/rooms", {
+var socket = io.connect("http://localhost:3000/rooms", {
   query: {
     roomToken: "fx7mwBE",
     speakerToken: "ChMD1qB"
@@ -204,7 +204,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53407" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -381,4 +381,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js","client.js"], null)
-//# sourceMappingURL=/client.62456f60.js.map
+//# sourceMappingURL=/client.js.map

@@ -41,7 +41,7 @@ createRoom.use(function timeLog(req, res, next) {
   console.log("(NEW) createRoomRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-createRoom.post('/', cors(corsOptions), function (req, res) {
+createRoom.post('/', cors(), function (req, res) {
   var roomName;
   var transcript = req.body.transcript || "";
   var proStatus = req.body.proStatus === "true" ? true : false;
@@ -51,7 +51,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
   if (String(req.body.roomName).length > 0 && typeof req.body.roomName === "string") {
     roomName = String(req.body.roomName);
   } else {
-    console.log("(FAILED) createDocument: roomName invalid argument \n\troomName: ".concat(req.body.roomName));
+    console.log("(FAILED) createDocument: roomName invalid argument \n\troomName: ".concat(Object.keys(req.body)));
     res.send(["createRoomFailed", {
       "type": "argumentInvalid",
       "errorMessage": "roomName argument invalid or empty"
@@ -61,8 +61,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
   }
 
   _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var speakerToken, roomToken, queryRes, newDoc, validateRes, _updateProRes, newRes;
-
+    var speakerToken, roomToken, queryRes, newDoc, validateRes, updateProRes, newRes;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -131,9 +130,9 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             });
 
           case 15:
-            _updateProRes = _context.sent;
+            updateProRes = _context.sent;
 
-            if (!(_updateProRes === 1)) {
+            if (!(updateProRes === 1)) {
               _context.next = 20;
               break;
             }
@@ -143,7 +142,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             break;
 
           case 20:
-            console.log("(FAILED) createRoom: updateProRes failed to update\n\tres: ".concat(JSON.stringify(_updateProRes), "\n\tname: ").concat(roomName, ", roomToken: ").concat(roomToken));
+            console.log("(FAILED) createRoom: updateProRes failed to update\n\tres: ".concat(JSON.stringify(updateProRes), "\n\tname: ").concat(roomName, ", roomToken: ").concat(roomToken));
             res.send(["createRoomFailed", {
               "type": "databaseUpdateFailed",
               "errorMessage": "Database failed to update new room"
@@ -155,7 +154,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             break;
 
           case 25:
-            console.log("(FAILED) createRoom: userTokenValidation failed\n\tres: ".concat(JSON.stringify(updateProRes)));
+            console.log("(FAILED) createRoom: userTokenValidation failed\n\tres: ".concat(JSON.stringify(validateRes)));
             res.send(["createRoomFailed", {
               "type": "userTokenValidationFailed",
               "errorMessage": "User has failed to authenticate as a PRO user"
