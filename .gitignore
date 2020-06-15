@@ -1,5 +1,4 @@
 /node_modules
-/dist
 /self
 .env
 /src/server/.cache

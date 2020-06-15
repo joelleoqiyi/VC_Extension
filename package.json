@@ -4,6 +4,7 @@
   "description": "A Google Chrome Extension tool which enables Q&A anytime during a videoconference/webinar.",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server/index.js",
     "test": "echo 'Joel is the best'",
     "build": "npx babel src --out-dir dist",
     "build_client": "npx babel src/client --out-dir dist/client",
