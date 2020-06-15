@@ -38,7 +38,7 @@ createRoom.post('/', cors(), function (req, res) {
   if (String(req.body.roomName).length > 0 && typeof req.body.roomName === "string"){
     roomName = String(req.body.roomName);
   } else { 
-    console.log(`\(FAILED\) createDocument: roomName invalid argument \n\troomName: ${req.body.roomName}, ${req.body.transcript}`);
+    console.log(`\(FAILED\) createDocument: roomName invalid argument \n\troomName: ${req.body}`);
     res.send([
         "createRoomFailed",
         {
