@@ -1,6 +1,6 @@
-window.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("button");
-    const result = document.getElementById("result");
+window.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('start-button');
+    const result = document.getElementById('result');
     const main = document.getElementsByTagName("main")[0];
     let listening = false;
     const SpeechRecognition =
