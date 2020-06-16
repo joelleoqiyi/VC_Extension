@@ -98,7 +98,7 @@ signUp.post('/', cors(corsOptions), function (req, res) {
   })().catch(err => console.error(`\(ERROR\) signUp:\n\t${err}`));
 })
 
-signUp.get('/check/:username', function (req, res) {
+signUp.get('/check/:username', cors(corsOptions), function (req, res) {
   if (String(req.params.username).indexOf("{") === -1 && String(req.params.username).indexOf("}") === -1){
     let username = String(req.params.username);
     (async()=>{

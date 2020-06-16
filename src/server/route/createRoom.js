@@ -66,7 +66,8 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             "initialised": false
         },
         "roomKey": roomToken, 
-        roomName, transcript, proStatus, 
+        roomName, transcript,
+        proStatus: false, 
         "expirationDate": getCurrDate(1)
     };
     if (haveUserToken && userToken){
@@ -76,6 +77,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
         );
         if (validateRes !== null){
             newDoc.expirationDate = getCurrDate(5);
+            newDoc.proStatus = true;
             let updateProRes = await updateDocument(
                 auth,
                 {userToken}, 
