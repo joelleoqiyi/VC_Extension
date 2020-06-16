@@ -9,17 +9,18 @@ h1{
   font-size: 50px;
 }
 
-button {
+.myButton {
+  display: inline-block;
   border-radius: 8px;
   transition-duration: 0.4s;
-  position: fixed;
-  left: 45%;
-  margin: auto;
-  width: 200px;
+  margin-right: 60px;
+  position: relative;
+  left: 30%;
+  width: 190px;
   height: 40px;
 }
 
-button:hover {
+.myButton:hover {
   background-color: rgb(4, 218, 4);
   color: white;
 }
@@ -27,8 +28,16 @@ button:hover {
 #result {
   border: 5px solid grey;
   margin: auto;
-  padding: 60px;
+  padding: 30px;
   background-color: white;
   width: 1000px;
   height: 300px;
+  width: 50%;
+  height: 120px;
+  overflow:auto;
+  position: relative;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text)
 }
