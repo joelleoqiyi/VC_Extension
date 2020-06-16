@@ -26,7 +26,7 @@ dataPro.use(function timeLog (req, res, next) {
 })
 
 
-dataPro.post('/', cors(corsOptions), function (req, res) {
+dataPro.post('/', cors(), function (req, res) {
   let username, password, userToken;
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {
     username = String(req.body.username);

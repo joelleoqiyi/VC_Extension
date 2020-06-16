@@ -27,7 +27,7 @@ createRoom.use(function timeLog (req, res, next) {
   next()
 })
 
-createRoom.post('/', cors(corsOptions), function (req, res) {
+createRoom.post('/', cors(), function (req, res) {
   let roomName;
   let transcript = req.body.transcript || "";
   let proStatus = (req.body.proStatus === "true") ? true : false;

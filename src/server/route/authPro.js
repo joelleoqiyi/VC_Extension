@@ -26,7 +26,7 @@ authPro.use(function timeLog (req, res, next) {
   next()
 })
 
-authPro.post('/signin', cors(corsOptions), function (req, res) {
+authPro.post('/signin', cors(), function (req, res) {
   let username, password;
   if (req.body.username !== undefined && req.body.password !== undefined) {
     username = String(req.body.username);
@@ -98,7 +98,7 @@ authPro.post('/signin', cors(corsOptions), function (req, res) {
 })
 
 
-authPro.post('/logout', cors(corsOptions), function (req, res) {
+authPro.post('/logout', cors(), function (req, res) {
   let username, password, userToken;
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {
     username = String(req.body.username);
