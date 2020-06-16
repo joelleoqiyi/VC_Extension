@@ -14,15 +14,16 @@ function readCaptions() {
                 if (wrapperClass.children){
                     if (wrapperClass.children[1].getAttribute("class") === "zs7s8d" && wrapperClass.children[1].innerHTML === "You"){
                         if (wrapperClass.children[2].getAttribute("class") === "Mz6pEf"){
-                            console.log(wrapperClass.children[2]);
                             if (wrapperClass.children[2].children[0].getAttribute("class") === "iTTPOb"){
                                 let transcriptMessages = wrapperClass.children[2].children[0].children;
                                 for (var currMessageCount=transcriptMessages.length-1; currMessageCount>=0;currMessageCount--){
                                     let transcriptMessage = String(transcriptMessages[currMessageCount].children[0].innerText);
                                     if (transcriptMessage !== prevUpdate){
                                         let repeatedMessage = transcriptMessage.search(prevUpdate);
-                                        if (repeatedMessage !== -1){
-                                            answer = answer.concat(String(transcriptMessage).substr(repeatedMessage+prevUpdate.length)+" ");
+                                        if (prevUpdate === ""){
+                                            answer = answer.concat(String(transcriptMessage)+" ");
+                                        } else if (repeatedMessage !== -1){
+                                            answer = answer.concat(String(transcriptMessage).substr(repeatedMessage+prevUpdate.length+1)+" ");
                                         } else {
                                             answer = answer.concat(String(transcriptMessage)+" ");
                                         }
