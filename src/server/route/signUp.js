@@ -129,13 +129,6 @@ signUp.get('/check/:username', cors(corsOptions), function (req, res) {
         res.end();
     })().catch(err => console.error(`\(ERROR\) checkUser:\n\t${err}`));
   } else {
-   /* res.send([
-        "checkUserFailed",
-        {
-            "type": "argumentInvalid",
-            "errorMessage": "username argument is invalid. Please try again!"
-        }
-    ]);*/
     return;
   }
 })

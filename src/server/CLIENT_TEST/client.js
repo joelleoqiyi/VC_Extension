@@ -24,7 +24,8 @@ $('#submitButton').click(function(){
             console.log(data,status);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });*/
-    $.get("https://vcxtension.herokuapp.com/register/check/Joelleol", 
+    let val = "Joelleol";
+    $.get(`https://vcxtension.herokuapp.com/register/check/${val}`, 
           function(data, status){
             if (status){
                 console.log(data);     
