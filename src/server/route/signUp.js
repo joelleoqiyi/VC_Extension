@@ -26,7 +26,7 @@ signUp.use(function timeLog (req, res, next) {
   next()
 })
 
-signUp.post('/', cors(corsOptions), function (req, res) {
+signUp.post('/', cors(), function (req, res) {
   let username, password, paidStatus;
   if (req.body.username !== undefined && req.body.password !== undefined && (req.body.paidStatus === "true" || req.body.paidStatus === true)) {
     username = String(req.body.username);
@@ -98,7 +98,7 @@ signUp.post('/', cors(corsOptions), function (req, res) {
   })().catch(err => console.error(`\(ERROR\) signUp:\n\t${err}`));
 })
 
-signUp.get('/check/:username', cors(corsOptions), function (req, res) {
+signUp.get('/check/:username', cors(), function (req, res) {
   if (String(req.params.username).indexOf("{") === -1 && String(req.params.username).indexOf("}") === -1){
     let username = String(req.params.username);
     (async()=>{
