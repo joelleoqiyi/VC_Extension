@@ -1,4 +1,4 @@
-let answer = "";
+let capturedValues = "";
 let prevUpdate = "";
 function readCaptions() {
     if (String(document.getElementsByClassName("a4cQT")[0].attributes[0].value) === "LM3KPc"){
@@ -21,11 +21,11 @@ function readCaptions() {
                                     if (transcriptMessage !== prevUpdate){
                                         let repeatedMessage = transcriptMessage.search(prevUpdate);
                                         if (prevUpdate === ""){
-                                            answer = answer.concat(String(transcriptMessage)+" ");
+                                            capturedValues = capturedValues.concat(String(transcriptMessage)+" ");
                                         } else if (repeatedMessage !== -1){
-                                            answer = answer.concat(String(transcriptMessage).substr(repeatedMessage+prevUpdate.length+1)+" ");
+                                            capturedValues = capturedValues.concat(String(transcriptMessage).substr(repeatedMessage+prevUpdate.length+1)+" ");
                                         } else {
-                                            answer = answer.concat(String(transcriptMessage)+" ");
+                                            capturedValues = capturedValues.concat(String(transcriptMessage)+" ");
                                         }
                                         prevUpdate = String(transcriptMessage);
                                         return (true);
@@ -47,10 +47,7 @@ const config = { attributes: true, childList: true, subtree: true };
 const callback = function(mutationsList, observer) {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-            if (readCaptions()){
-                console.log(answer);
-                //do something
-            }
+            readCaptions(); 
         }
     }
 };
@@ -58,5 +55,15 @@ const callback = function(mutationsList, observer) {
 // Create an observer instance linked to the callback function
 const observer = new MutationObserver(callback);
 
-// Start observing the target node for configured mutations
-observer.observe(targetNode, config);
+// Start observing the target node for configured mutations and send it back to background.js every 10 seconds.
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if( request.message === "start") {
+        observer.observe(targetNode, config);
+        setInterval(function(){     
+            chrome.runtime.sendMessage({"newTranscript": capturedValues});
+        }, 10000);
+     }
+   }
+);
+
