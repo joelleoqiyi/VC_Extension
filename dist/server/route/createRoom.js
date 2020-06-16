@@ -41,7 +41,7 @@ createRoom.use(function timeLog(req, res, next) {
   console.log("(NEW) createRoomRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-createRoom.post('/', cors(corsOptions), function (req, res) {
+createRoom.post('/', cors(), function (req, res) {
   var roomName;
   var transcript = req.body.transcript || "";
   var proStatus = req.body.proStatus === "true" ? true : false;
@@ -94,12 +94,12 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
               "roomKey": roomToken,
               roomName: roomName,
               transcript: transcript,
-              proStatus: proStatus,
+              proStatus: false,
               "expirationDate": (0, _date.getCurrDate)(1)
             };
 
             if (!(haveUserToken && userToken)) {
-              _context.next = 28;
+              _context.next = 29;
               break;
             }
 
@@ -114,12 +114,13 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             validateRes = _context.sent;
 
             if (!(validateRes !== null)) {
-              _context.next = 25;
+              _context.next = 26;
               break;
             }
 
             newDoc.expirationDate = (0, _date.getCurrDate)(5);
-            _context.next = 15;
+            newDoc.proStatus = true;
+            _context.next = 16;
             return (0, _db.updateDocument)(_config.auth, {
               userToken: userToken
             }, null, {
@@ -129,19 +130,19 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
               }
             });
 
-          case 15:
+          case 16:
             updateProRes = _context.sent;
 
             if (!(updateProRes === 1)) {
-              _context.next = 20;
+              _context.next = 21;
               break;
             }
 
             console.log("(PASS) createRoom: updateProAuth");
-            _context.next = 23;
+            _context.next = 24;
             break;
 
-          case 20:
+          case 21:
             console.log("(FAILED) createRoom: updateProRes failed to update\n\tres: ".concat(JSON.stringify(updateProRes), "\n\tname: ").concat(roomName, ", roomToken: ").concat(roomToken));
             res.send(["createRoomFailed", {
               "type": "databaseUpdateFailed",
@@ -149,11 +150,11 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             }]);
             return _context.abrupt("return");
 
-          case 23:
-            _context.next = 28;
+          case 24:
+            _context.next = 29;
             break;
 
-          case 25:
+          case 26:
             console.log("(FAILED) createRoom: userTokenValidation failed\n\tres: ".concat(JSON.stringify(validateRes)));
             res.send(["createRoomFailed", {
               "type": "userTokenValidationFailed",
@@ -161,15 +162,15 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             }]);
             return _context.abrupt("return");
 
-          case 28:
-            _context.next = 30;
+          case 29:
+            _context.next = 31;
             return (0, _db.newDocument)(_config.room, newDoc);
 
-          case 30:
+          case 31:
             newRes = _context.sent;
 
             if (!(newRes === 1)) {
-              _context.next = 36;
+              _context.next = 37;
               break;
             }
 
@@ -182,10 +183,10 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
                 "speakerToken": speakerToken
               }
             }]);
-            _context.next = 39;
+            _context.next = 40;
             break;
 
-          case 36:
+          case 37:
             console.log("(FAILED) createRoom: newRes failed to update\n\tres: ".concat(newRes, "\n\tDocument: ").concat(newDoc));
             res.send(["createRoomFailed", {
               "type": "databaseUpdateFailed",
@@ -193,10 +194,10 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
             }]);
             return _context.abrupt("return");
 
-          case 39:
+          case 40:
             res.end();
 
-          case 40:
+          case 41:
           case "end":
             return _context.stop();
         }
@@ -208,5 +209,6 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
 }); //easter-egg?
 
 createRoom.get('/easteregg', cors(), function (req, res) {
-  res.send('Good Morning! Well done! Life is hard, and you just made it harder!');
+  console.log("(NEW) easterEggRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
+  res.send("Good Morning!\n\tEasterEgg created at ".concat((0, _date.getCurrDate)(0), "\n\tWell done! Life is hard, and you just made it harder!"));
 });

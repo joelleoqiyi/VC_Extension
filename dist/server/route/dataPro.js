@@ -38,7 +38,7 @@ dataPro.use(function timeLog(req, res, next) {
   console.log("(NEW) dataProRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-dataPro.post('/', cors(corsOptions), function (req, res) {
+dataPro.post('/', cors(), function (req, res) {
   var username, password, userToken;
 
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {
@@ -85,7 +85,7 @@ dataPro.post('/', cors(corsOptions), function (req, res) {
               console.log("(FAILED) dataPro: userValidation failed\n\tusername: ".concat(username, ", password: ").concat(password, ", userToken: ").concat(userToken));
               res.send(["dataProFailed", {
                 "type": "userValidationFailed",
-                "errorMessage": "user not logged in."
+                "errorMessage": "user not logged in or userToken invalid"
               }]);
             }
 

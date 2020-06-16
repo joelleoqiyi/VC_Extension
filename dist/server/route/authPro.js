@@ -40,7 +40,7 @@ authPro.use(function timeLog(req, res, next) {
   console.log("(NEW) authProRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-authPro.post('/signin', cors(corsOptions), function (req, res) {
+authPro.post('/signin', cors(), function (req, res) {
   var username, password;
 
   if (req.body.username !== undefined && req.body.password !== undefined) {
@@ -139,7 +139,7 @@ authPro.post('/signin', cors(corsOptions), function (req, res) {
     return console.error("(ERROR) authPro signin:\n\t".concat(err));
   });
 });
-authPro.post('/logout', cors(corsOptions), function (req, res) {
+authPro.post('/logout', cors(), function (req, res) {
   var username, password, userToken;
 
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {

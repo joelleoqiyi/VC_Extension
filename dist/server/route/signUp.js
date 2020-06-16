@@ -40,7 +40,7 @@ signUp.use(function timeLog(req, res, next) {
   console.log("(NEW) signUpRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-signUp.post('/', cors(corsOptions), function (req, res) {
+signUp.post('/', cors(), function (req, res) {
   var username, password, paidStatus;
 
   if (req.body.username !== undefined && req.body.password !== undefined && (req.body.paidStatus === "true" || req.body.paidStatus === true)) {
@@ -137,7 +137,7 @@ signUp.post('/', cors(corsOptions), function (req, res) {
     return console.error("(ERROR) signUp:\n\t".concat(err));
   });
 });
-signUp.get('/check/:username', function (req, res) {
+signUp.get('/check/:username', cors(), function (req, res) {
   if (String(req.params.username).indexOf("{") === -1 && String(req.params.username).indexOf("}") === -1) {
     var username = String(req.params.username);
 
@@ -189,13 +189,6 @@ signUp.get('/check/:username', function (req, res) {
       return console.error("(ERROR) checkUser:\n\t".concat(err));
     });
   } else {
-    /* res.send([
-         "checkUserFailed",
-         {
-             "type": "argumentInvalid",
-             "errorMessage": "username argument is invalid. Please try again!"
-         }
-     ]);*/
     return;
   }
 });

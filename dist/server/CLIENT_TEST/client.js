@@ -2,27 +2,37 @@
 
 //form submission
 $('#submitButton').click(function () {
-  $.post("https://vcxtension.herokuapp.com/create", // $.post("http://localhost:3000/create",
+  //$.post("https://vcxtension.herokuapp.com/create",
+
+  /*$.post("http://localhost:3000/create",
   {
-    transcript: "smth... ",
-    proStatus: true,
-    roomName: "hello",
-    userToken: "0fmzYn2"
+      transcript: "smth... ",
+      proStatus: true,
+      roomName: "hello"
+      //userToken: "0fmzYn2"
+  },
+  function(data, status){
+          console.log(data);
+          //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+  });*/
+  $.post("http://localhost:3000/data", {
+    "username": "Joelleo",
+    "password": "12345",
+    "userToken": "bQGcnE9",
+    "paidStatus": true
   }, function (data, status) {
-    console.log(data); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
+    console.log(data, status); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
-  /*     
-  $.post("http://localhost:3000/register",
-   {
-       "username": "Joelleol",
-       "password": "12345",
-       "userToken": "dfIVc84",
-       "paidStatus": true
-   },
-   function(data, status){
-           console.log(data);
-           //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-   });*/
+  /*    let val = "Joelleol";
+      $.get(`https://vcxtension.herokuapp.com/register/check/${val}`, 
+            function(data, status){
+              if (status){
+                  console.log(data);     
+              } else {
+                $("#alertMsg").text(`Error! Something went wrong! Try again. `);
+              }
+            }
+        );*/
 }); //normal users
 
 var socket = io.connect("https://vcxtension.herokuapp.com/rooms", {

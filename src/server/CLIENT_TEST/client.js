@@ -12,19 +12,19 @@ $('#submitButton').click(function(){
             console.log(data);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
     });*/
-/*
+
    $.post("http://localhost:3000/data",
     {
-        "username": "Joelleo",
+        "username": "Joelleol",
         "password": "12345",
-        "userToken": "bQGcnE9",
+        "userToken": "dfIVc84",
         "paidStatus": true
     },
     function(data, status){
             console.log(data,status);
             //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-    });*/
-    let val = "Joelleol";
+    });
+/*    let val = "Joelleol";
     $.get(`https://vcxtension.herokuapp.com/register/check/${val}`, 
           function(data, status){
             if (status){
@@ -33,7 +33,7 @@ $('#submitButton').click(function(){
               $("#alertMsg").text(`Error! Something went wrong! Try again. `);
             }
           }
-      );
+      );*/
 });
 
 //normal users
