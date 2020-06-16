@@ -1,5 +1,6 @@
 let answer = "";
-function helloworld() {
+let prevUpdate = "";
+function readCaptions() {
     if (String(document.getElementsByClassName("a4cQT")[0].attributes[0].value) === "LM3KPc"){
         let wrapperAncestorClass = document.getElementsByClassName("a4cQT")[0];
         let wrapperParentClass;
@@ -15,10 +16,21 @@ function helloworld() {
                         if (wrapperClass.children[2].getAttribute("class") === "Mz6pEf"){
                             console.log(wrapperClass.children[2]);
                             if (wrapperClass.children[2].children[0].getAttribute("class") === "iTTPOb"){
-                                console.log(wrapperClass.children[2]);
                                 let transcriptMessages = wrapperClass.children[2].children[0].children;
-                                for (transcriptMessage of transcriptMessages){
-                                    answer = answer.concat(String(transcriptMessage.children[0].innerText))
+                                for (var currMessageCount=transcriptMessages.length-1; currMessageCount>=0;currMessageCount--){
+                                    let transcriptMessage = String(transcriptMessages[currMessageCount].children[0].innerText);
+                                    if (transcriptMessage !== prevUpdate){
+                                        let repeatedMessage = transcriptMessage.search(prevUpdate);
+                                        if (repeatedMessage !== -1){
+                                            answer = answer.concat(String(transcriptMessage).substr(repeatedMessage+prevUpdate.length)+" ");
+                                        } else {
+                                            answer = answer.concat(String(transcriptMessage)+" ");
+                                        }
+                                        prevUpdate = String(transcriptMessage);
+                                        return (true);
+                                    } else {
+                                        return (false);
+                                    }
                                 }
                             }
                         }
@@ -28,5 +40,22 @@ function helloworld() {
         }
     }
 }
-helloworld();
-console.log("YAY!", answer);
+
+let targetNode = document.getElementsByClassName("a4cQT")[0];
+const config = { attributes: true, childList: true, subtree: true };
+const callback = function(mutationsList, observer) {
+    for(let mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            if (readCaptions()){
+                console.log(answer);
+                //do something
+            }
+        }
+    }
+};
+
+// Create an observer instance linked to the callback function
+const observer = new MutationObserver(callback);
+
+// Start observing the target node for configured mutations
+observer.observe(targetNode, config);
