@@ -67,7 +67,7 @@ io.of("/rooms").on("connection", (socket) => {
     let res = await queryDocument(
         room,
         [{"roomKey": socket.roomToken}],
-        ["roomKey", "proStatus", "transcript", "speaker.sid", "speaker.initialised", "speaker.token"]
+        ["roomKey", "proStatus", "roomName", "transcript", "speaker.sid", "speaker.initialised", "speaker.token"]
     );
     let isPro = (res.proStatus === true) ? true : false;
     if (res.speaker.sid === null && res.speaker.initialised === false && res.speaker.token !== undefined && res.speaker.token !== null){
@@ -108,7 +108,8 @@ io.of("/rooms").on("connection", (socket) => {
                 "roomToken": res.roomKey,
                 "transcript": res.transcript || "",
                 "proStatus": res.proStatus || false,
-                "speaker": isSpeaker
+                "speaker": isSpeaker,
+                "roomName": res.roomName || "No Room Name"
         }
     Object.keys(toBePayload).forEach(function (key) {
         if (toBePayload[key] === false) {
