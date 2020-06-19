@@ -109,7 +109,7 @@ io.of("/rooms").on("connection", (socket) => {
                 "transcript": res.transcript || "",
                 "proStatus": res.proStatus || false,
                 "speaker": isSpeaker,
-                "roomNamer": res.roomName || "No Room Name"
+                "roomName": res.roomName || "No Room Name"
         }
     Object.keys(toBePayload).forEach(function (key) {
         if (toBePayload[key] === false) {
