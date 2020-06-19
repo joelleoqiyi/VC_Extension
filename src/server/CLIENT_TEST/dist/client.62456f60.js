@@ -133,27 +133,24 @@ $('#submitButton').click(function () {
           console.log(data);
           //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });*/
-
-  /*
-     $.post("http://localhost:3000/data",
-      {
-          "username": "Joelleo",
-          "password": "12345",
-          "userToken": "bQGcnE9",
-          "paidStatus": true
-      },
-      function(data, status){
-              console.log(data,status);
-              //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-      });*/
-  var val = "Joelleol";
-  $.get("https://vcxtension.herokuapp.com/register/check/".concat(val), function (data, status) {
-    if (status) {
-      console.log(data);
-    } else {
-      $("#alertMsg").text("Error! Something went wrong! Try again. ");
-    }
+  $.post("http://localhost:3000/data", {
+    "username": "Joelleol",
+    "password": "12345",
+    "userToken": "dfIVc84",
+    "paidStatus": true
+  }, function (data, status) {
+    console.log(data, status); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
   });
+  /*    let val = "Joelleol";
+      $.get(`https://vcxtension.herokuapp.com/register/check/${val}`, 
+            function(data, status){
+              if (status){
+                  console.log(data);     
+              } else {
+                $("#alertMsg").text(`Error! Something went wrong! Try again. `);
+              }
+            }
+        );*/
 }); //normal users
 
 var socket = io.connect("https://vcxtension.herokuapp.com/rooms", {
@@ -218,7 +215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49341" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53572" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
