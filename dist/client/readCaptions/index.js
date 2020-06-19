@@ -1,12 +1,12 @@
 "use strict";
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var answer = "";
+var capturedValues = "";
 var prevUpdate = "";
 
 function readCaptions() {
@@ -41,11 +41,11 @@ function readCaptions() {
                       var repeatedMessage = transcriptMessage.search(prevUpdate);
 
                       if (prevUpdate === "") {
-                        answer = answer.concat(String(transcriptMessage) + " ");
+                        capturedValues = capturedValues.concat(String(transcriptMessage) + " ");
                       } else if (repeatedMessage !== -1) {
-                        answer = answer.concat(String(transcriptMessage).substr(repeatedMessage + prevUpdate.length + 1) + " ");
+                        capturedValues = capturedValues.concat(String(transcriptMessage).substr(repeatedMessage + prevUpdate.length + 1) + " ");
                       } else {
-                        answer = answer.concat(String(transcriptMessage) + " ");
+                        capturedValues = capturedValues.concat(String(transcriptMessage) + " ");
                       }
 
                       prevUpdate = String(transcriptMessage);
@@ -84,9 +84,7 @@ var callback = function callback(mutationsList, observer) {
       var mutation = _step2.value;
 
       if (mutation.type === 'childList') {
-        if (readCaptions()) {
-          console.log(answer); //do something
-        }
+        readCaptions();
       }
     }
   } catch (err) {
@@ -97,6 +95,15 @@ var callback = function callback(mutationsList, observer) {
 }; // Create an observer instance linked to the callback function
 
 
-var observer = new MutationObserver(callback); // Start observing the target node for configured mutations
+var observer = new MutationObserver(callback); // Start observing the target node for configured mutations and send it back to background.js every 10 seconds.
 
-observer.observe(targetNode, config);
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "start") {
+    observer.observe(targetNode, config);
+    setInterval(function () {
+      chrome.runtime.sendMessage({
+        "newTranscript": capturedValues
+      });
+    }, 10000);
+  }
+});

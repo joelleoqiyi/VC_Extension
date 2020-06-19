@@ -18,7 +18,7 @@ $('#submitButton').click(function () {
   $.post("http://localhost:3000/data", {
     "username": "Joelleo",
     "password": "12345",
-    "userToken": "bQGcnE9",
+    "userToken": "dfIVc84",
     "paidStatus": true
   }, function (data, status) {
     console.log(data, status); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);

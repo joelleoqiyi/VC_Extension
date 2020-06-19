@@ -119,7 +119,7 @@ io.of("/rooms").on("connection", function (socket) {
             _context2.next = 2;
             return (0, _db.queryDocument)(_config.room, [{
               "roomKey": socket.roomToken
-            }], ["roomKey", "proStatus", "transcript", "speaker.sid", "speaker.initialised", "speaker.token"]);
+            }], ["roomKey", "proStatus", "roomName", "transcript", "speaker.sid", "speaker.initialised", "speaker.token"]);
 
           case 2:
             res = _context2.sent;
@@ -172,7 +172,8 @@ io.of("/rooms").on("connection", function (socket) {
               "roomToken": res.roomKey,
               "transcript": res.transcript || "",
               "proStatus": res.proStatus || false,
-              "speaker": isSpeaker
+              "speaker": isSpeaker,
+              "roomName": res.roomName || "No Room Name"
             };
             Object.keys(toBePayload).forEach(function (key) {
               if (toBePayload[key] === false) {
