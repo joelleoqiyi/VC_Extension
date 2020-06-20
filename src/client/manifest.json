@@ -5,18 +5,18 @@
     "manifest_version": 2,
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
-            "js": ["index.js"]
+            "matches": ["https://meet.google.com/*"],
+            "js": ["content.js"]
         }
     ],
     "browser_action": {
         "default_popup": "popup.html",
-        "default_title": "something to be decided"
+        "default_title": "VCXtension"
     },
     "background": {
         "scripts": ["background.js"]
     },
     "permissions": [
         "tabs"
-    ]   
+    ]
 }

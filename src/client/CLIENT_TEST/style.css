@@ -1,0 +1,59 @@
+
+body{
+background: rgb(231, 231, 231)
+}
+
+h1{
+margin: auto;
+text-align: center;
+padding-top: 10px;
+font-size: 50px;
+}
+
+.myButton {
+display: inline-block;
+border-radius: 8px;
+transition-duration: 0.4s;
+margin: auto;
+position: relative;
+left: 10%;
+width: 190px;
+height: 40px;
+}
+
+.myButton:hover {
+background-color: rgb(4, 218, 4);
+color: white;
+
+
+}
+
+#result {
+border: 5px solid grey;
+margin: auto;
+padding: 30px;
+background-color: white;
+width: 80%;
+height: 120px;
+overflow:auto;
+position: relative;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+content:attr(data-text)
+}
+
+#roomkey {
+border: 5px solid grey;
+margin: auto;
+padding: 30px;
+background-color: white;
+height: 20px;
+position: relative;
+width: 20px;
+text-align: start;
+}
+
+#question {
+b;
+}

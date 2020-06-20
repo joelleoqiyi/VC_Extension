@@ -135,7 +135,7 @@ parcelRequire = function (modules, cache, entry, globalName) {
               //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
       });*/
       $.post("http://localhost:3000/data", {
-        "username": "Joelleol",
+        "username": "Joelleo",
         "password": "12345",
         "userToken": "dfIVc84",
         "paidStatus": true
@@ -217,7 +217,7 @@ parcelRequire = function (modules, cache, entry, globalName) {
     if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
       var hostname = "" || location.hostname;
       var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-      var ws = new WebSocket(protocol + '://' + hostname + ':' + "53572" + '/');
+      var ws = new WebSocket(protocol + '://' + hostname + ':' + "55156" + '/');
 
       ws.onmessage = function (event) {
         checkedAssets = {};

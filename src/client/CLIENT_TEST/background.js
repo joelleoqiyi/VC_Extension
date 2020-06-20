@@ -47,11 +47,7 @@ if (toContinue){
         localStorage.setItem('VCXspeakerStatus', String(msg.payload.speaker));
         var speakerStatusToBeDisplayed = document.createTextNode("Speaker");
         document.body.appendChild(speakerStatusToBeDisplayed);
-        chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) {
-          for (tab of tabs){
-            chrome.tabs.sendMessage(tab.id, {"message": "start"});
-          }          
-        });
+        chrome.tabs.sendMessage("start", {"message": "start"});
       }
       //displaying roomName
       var roomNameToBeDisplayed = document.createTextNode(localStorage.getItem('VCXroomName'));
@@ -124,6 +120,8 @@ if (toContinue){
           //result.innerHTML = "";
           questionText = "";
           for (const res of event.results) {
+            //const text = document.createTextNode(res[0].transcript);
+            //const p = document.createElement("p");
             questionText = questionText.concat(String(res[0].transcript));
             if (res.isFinal) {
               questionText = questionText.concat(".");
@@ -165,29 +163,22 @@ if (toContinue){
         questionText = prompt("Please enter your question: ", "");
         process(questionText);
       });
-
-      //------- all the transcript update stuff -------
       chrome.runtime.onMessage.addListener(
         function(request, sender, sendResponse) {
           if(request.newTranscript && request.newTranscript !== "") {
-            if (localStorage.getItem("VCXspeakerStatus") === true){
+            if (localStorage.getItem("VCXspeakerStatus")){
               socket.emit("transcriptUpdate", request.newTranscript);
             }
           }
         }
       );
-      socket.on("transcriptUpdateCleared", (transcriptMsg)=>{ //global for all users
+      socket.on("transcriptUpdateCleared", (transcriptMsg)=>{
         localStorage.setItem('VCXroomTranscript', transcriptMsg.payload.transcript);
       });
       socket.on("transcriptUpdateFailed", (transcriptMsg)=>{console.log(transcriptMsg)});
     }
   })
 }
-
-
-
-
-
 /*
 // if free only have stt peaker
 window.addEventListener('DOMContentLoaded', () => {
