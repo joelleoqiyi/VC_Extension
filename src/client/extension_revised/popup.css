@@ -1,0 +1,62 @@
+body{
+background: rgb(231, 231, 231)
+}
+
+#start-button {
+display: inline-block;
+border-radius: 8px;
+transition-duration: 0.4s;
+margin: 10px;
+position: relative;
+width: 190px;
+height: 40px;
+}
+
+#start-button:hover {
+background-color: rgb(4, 218, 4);
+color: white;
+}
+
+#search {
+display: inline-block;
+border-radius: 8px;
+transition-duration: 0.4s;
+margin: 10px;
+position: relative;
+width: 190px;
+height: 40px;
+}
+
+#search:hover {
+background-color: rgb(4, 218, 4);
+color: white;
+}
+
+#roomkey {
+border: 5px solid grey;
+margin: auto;
+padding: 30px;
+background-color: white;
+height: 20px;
+position: relative;
+width: 20px;
+text-align: start;
+}
+
+#question {
+display: inline-block;
+border-radius: 8px;
+margin:10px;
+}
+
+#answer {
+  display: inline-block
+}
+
+h1 {
+  text-align:center;
+}
+
+#roomname {
+	text-align:center;
+}
