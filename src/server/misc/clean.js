@@ -6,7 +6,7 @@ import {auth, room} from './config'
 
 //executable function.
 (async ()=>{
-    let DaysToClean = [-1, -2, -3 , -4, -5];
+    let DaysToClean = [-1, -2, -3 , -4, -5, 1 , 2, 3, 4,5 ];
     DaysToClean.forEach((day,i)=>{
         DaysToClean[i] = getCurrDate(day);
     });

@@ -15,7 +15,7 @@ $('#submitButton').click(function(){
 
    $.post("http://localhost:3000/data",
     {
-        "username": "Joelleo",
+        "username": "Joelleol",
         "password": "12345",
         "userToken": "dfIVc84",
         "paidStatus": true

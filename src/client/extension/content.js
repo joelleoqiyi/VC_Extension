@@ -51,23 +51,26 @@ const config = { attributes: true, childList: true, subtree: true };
 const callback = function(mutationsList, observer) {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-            readCaptions(); 
+            readCaptions();
+            //console.log(capturedValues);
         }
     }
 };
 
 // Create an observer instance linked to the callback function
 const observer = new MutationObserver(callback);
-
 // Start observing the target node for configured mutations and send it back to background.js every 10 seconds.
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "start") {
+        targetNode = document.getElementsByClassName("a4cQT")[0];
         observer.observe(targetNode, config);
-        setInterval(function(){     
-            chrome.runtime.sendMessage({"newTranscript": capturedValues});
-        }, 10000);
+        /*setInterval(function(){
+            //chrome.runtime.sendMessage({"newTranscript": capturedValues});
+        }, 10000);*/
+     } else if (request.message === "listening"){
+       //console.log(capturedValues)
+       sendResponse(capturedValues);
      }
    }
 );
-

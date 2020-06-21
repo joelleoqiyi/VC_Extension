@@ -51,7 +51,7 @@ const config = { attributes: true, childList: true, subtree: true };
 const callback = function(mutationsList, observer) {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-            readCaptions(); 
+            readCaptions();
         }
     }
 };
@@ -64,10 +64,9 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "start") {
         observer.observe(targetNode, config);
-        setInterval(function(){     
+        setInterval(function(){
             chrome.runtime.sendMessage({"newTranscript": capturedValues});
         }, 10000);
      }
    }
 );
-

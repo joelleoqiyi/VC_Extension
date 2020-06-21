@@ -117,77 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"client.js":[function(require,module,exports) {
-//form submission
-$('#submitButton').click(function () {
-  //$.post("https://vcxtension.herokuapp.com/create",
+})({"../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-  /*$.post("http://localhost:3000/create",
-  {
-      transcript: "smth... ",
-      proStatus: true,
-      roomName: "hello"
-      //userToken: "0fmzYn2"
-  },
-  function(data, status){
-          console.log(data);
-          //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-  });*/
-  $.post("http://localhost:3000/data", {
-    "username": "Joelleol",
-    "password": "12345",
-    "userToken": "dfIVc84",
-    "paidStatus": true
-  }, function (data, status) {
-    console.log(data, status); //console.log("Data: " + data[1].payload.roomToken + data[1].payload.speakerToken + "\nStatus: " + status);
-  });
-  /*    let val = "Joelleol";
-      $.get(`https://vcxtension.herokuapp.com/register/check/${val}`, 
-            function(data, status){
-              if (status){
-                  console.log(data);     
-              } else {
-                $("#alertMsg").text(`Error! Something went wrong! Try again. `);
-              }
-            }
-        );*/
-}); //normal users
-
-var socket = io.connect("https://vcxtension.herokuapp.com/rooms", {
-  query: {
-    roomToken: "fx7mwBE",
-    speakerToken: "ChMD1qB"
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
-}); //Example Usage
 
-socket.on("initHandshake", function (msg) {
-  console.log(msg);
-  socket.emit("transcriptUpdate", "helloworld!");
-  socket.emit("escalationRequest", [msg.payload.proStatus, "hello world!"]);
-  socket.emit("checkStatus", msg.payload.proStatus);
-});
-socket.on("speakerEnteredCleared", function (msg) {
-  console.log(msg);
-});
-socket.on("transcriptUpdateCleared", function (msg) {
-  console.log(msg);
-});
-socket.on("transcriptUpdateFailed", function (msg) {
-  console.log(msg);
-});
-socket.on("escalationRequestCleared", function (msg) {
-  console.log(msg);
-});
-socket.on("escalationRequestSent", function (msg) {
-  console.log(msg);
-});
-socket.on("escalationRequestFailed", function (msg) {
-  console.log(msg);
-});
-socket.on("checkStatusCleared", function (msg) {
-  console.log(msg);
-});
-},{}],"../../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/bundle-url.js"}],"popup.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/css-loader.js"}],"../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -215,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56318" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49484" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -391,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js","client.js"], null)
-//# sourceMappingURL=/client.62456f60.js.map
+},{}]},{},["../../../../../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/popup.bc5f663e.js.map

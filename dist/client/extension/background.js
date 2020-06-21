@@ -1,3 +1,5 @@
+/*
+
 var room_token = prompt("Please enter your room key: ", "");
 var speaker_token = prompt("Please enter your user token: ", "");
 let toContinue = true;
@@ -18,7 +20,12 @@ if (toContinue){
   socket.on("initHandshake", (msg)=> {
     if (msg.type === "pass"){ //passed enterRoom event.
       alert(`Congrats you entered the room: ${room_token}`);
-
+      chrome.storage.local.set({"VCXroomToken": String(msg.payload.roomToken)}, function() {
+          console.log('Room Token is stored in localstorage.');
+      });
+      chrome.storage.local.get("VCXroomToken", function(result){
+        console.log(result)
+      })
       //------ setting "global" variables -----
       const modelPromise = qna.load(); //loading the model.
       //get question from html//
@@ -35,9 +42,15 @@ if (toContinue){
       contextDiv = document.getElementById('result');
       //answer outputed by model//
       answerDiv = document.getElementById('answer');
+      //room name outputted
+      roomname = document.getElementById('roomname');
+      //userstatus outputted
+      userstatus = document.getElementById('usertype');
 
       //------ setting localStorage items -------
       localStorage.setItem('VCXroomToken', String(msg.payload.roomToken));
+      alert(msg.payload.roomToken);
+
       localStorage.setItem('VCXroomTranscript', String(msg.payload.transcript));
       localStorage.setItem('VCXroomName', String(msg.payload.roomName));
       if (msg.payload.proStatus !== undefined){
@@ -45,17 +58,15 @@ if (toContinue){
       }
       if (msg.payload.speaker !== undefined && msg.payload.speaker === true){
         localStorage.setItem('VCXspeakerStatus', String(msg.payload.speaker));
-        var speakerStatusToBeDisplayed = document.createTextNode("Speaker");
-        document.body.appendChild(speakerStatusToBeDisplayed);
+        userstatus.innerHTML = "Speaker";
         chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) {
           for (tab of tabs){
             chrome.tabs.sendMessage(tab.id, {"message": "start"});
-          }          
+          }
         });
       }
       //displaying roomName
-      var roomNameToBeDisplayed = document.createTextNode(localStorage.getItem('VCXroomName'));
-      document.body.appendChild(roomNameToBeDisplayed);
+      roomname.innerHTML = localStorage.getItem('VCXroomName');
 
       //----- model goes here... -----
 
@@ -183,10 +194,7 @@ if (toContinue){
     }
   })
 }
-
-
-
-
+*/
 
 /*
 // if free only have stt peaker
@@ -225,3 +233,4 @@ window.onload = () => {
   answerDiv = document.getElementById('answer');
   search.onclick = process;
 };*/
+"use strict";

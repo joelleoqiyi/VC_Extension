@@ -19,7 +19,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          DaysToClean = [-1, -2, -3, -4, -5];
+          DaysToClean = [-1, -2, -3, -4, -5, 1, 2, 3, 4, 5];
           DaysToClean.forEach(function (day, i) {
             DaysToClean[i] = (0, _date.getCurrDate)(day);
           });
