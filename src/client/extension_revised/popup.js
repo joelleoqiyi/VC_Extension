@@ -23,23 +23,14 @@ document.addEventListener("DOMContentLoaded", function ()  {
           alert(`Congrats you entered the room: ${room_token}`);
 
           const modelPromise = qna.load();
-
           const input = document.getElementById('question');
-
           const speakerButton = document.getElementById('start-button');
-
           const result = document.getElementById('result');
-
           const main = document.getElementsByTagName("main")[0];
-
           const textButton = document.getElementById('search');
-
           const contextDiv = document.getElementById('result');
-
           const answerDiv = document.getElementById('answer');
-
           const roomname = document.getElementById('roomname');
-
           const userstatus = document.getElementById('usertype');
 
           chrome.storage.local.set({"VCXroomToken": String(msg.payload.roomToken)}, function() {
