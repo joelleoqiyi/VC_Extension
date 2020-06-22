@@ -10,7 +10,7 @@ var signUp = express.Router()
 var cors = require('cors')
 
 //setting up CORS settings
-var whitelist = ['http://localhost:1234', 'http://example2.com']
+var whitelist = ['https://vcxtension-website.herokuapp.com/', 'http://localhost:1234']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -26,7 +26,7 @@ signUp.use(function timeLog (req, res, next) {
   next()
 })
 
-signUp.post('/', cors(), function (req, res) {
+signUp.post('/', cors(corsOptions), function (req, res) {
   let username, password, paidStatus;
   if (req.body.username !== undefined && req.body.password !== undefined && (req.body.paidStatus === "true" || req.body.paidStatus === true)) {
     username = String(req.body.username);
@@ -58,7 +58,7 @@ signUp.post('/', cors(), function (req, res) {
                 "userToken": userToken,
                 "currActiveStatus": true,
                 "currActiveRooms": []
-            } 
+            }
         );
         if (newRes === 1){
             console.log(`\(NEW\) signUp: NEW PRO user signed up`);
@@ -98,7 +98,7 @@ signUp.post('/', cors(), function (req, res) {
   })().catch(err => console.error(`\(ERROR\) signUp:\n\t${err}`));
 })
 
-signUp.get('/check/:username', cors(), function (req, res) {
+signUp.get('/check/:username', cors(corsOptions), function (req, res) {
   if (String(req.params.username).indexOf("{") === -1 && String(req.params.username).indexOf("}") === -1){
     let username = String(req.params.username);
     (async()=>{

@@ -9,7 +9,7 @@ var dataPro = express.Router()
 var cors = require('cors')
 
 //setting up CORS settings
-var whitelist = ['http://localhost:1234', 'http://example2.com']
+var whitelist = ['https://vcxtension-website.herokuapp.com/', 'http://localhost:1234']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -26,7 +26,7 @@ dataPro.use(function timeLog (req, res, next) {
 })
 
 
-dataPro.post('/', cors(), function (req, res) {
+dataPro.post('/', cors(corsOptions), function (req, res) {
   let username, password, userToken;
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {
     username = String(req.body.username);

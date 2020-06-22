@@ -10,7 +10,7 @@ var createRoom = express.Router()
 var cors = require('cors')
 
 //setting up CORS settings
-var whitelist = ['http://localhost:1234', 'http://example2.com']
+var whitelist = ['https://vcxtension-website.herokuapp.com/', 'http://localhost:1234']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -27,7 +27,7 @@ createRoom.use(function timeLog (req, res, next) {
   next()
 })
 
-createRoom.post('/', cors(), function (req, res) {
+createRoom.post('/', cors(corsOptions), function (req, res) {
   let roomName;
   let transcript = req.body.transcript || "";
   let proStatus = (req.body.proStatus === "true") ? true : false;
@@ -37,7 +37,7 @@ createRoom.post('/', cors(), function (req, res) {
                     : null
   if (String(req.body.roomName).length > 0 && typeof req.body.roomName === "string"){
     roomName = String(req.body.roomName);
-  } else { 
+  } else {
     console.log(`\(FAILED\) createDocument: roomName invalid argument \n\troomName: ${Object.keys(req.body)}`);
     res.send([
         "createRoomFailed",
@@ -65,9 +65,9 @@ createRoom.post('/', cors(), function (req, res) {
             "token": speakerToken,
             "initialised": false
         },
-        "roomKey": roomToken, 
+        "roomKey": roomToken,
         roomName, transcript,
-        proStatus: false, 
+        proStatus: false,
         "expirationDate": getCurrDate(1)
     };
     if (haveUserToken && userToken){
@@ -80,7 +80,7 @@ createRoom.post('/', cors(), function (req, res) {
             newDoc.proStatus = true;
             let updateProRes = await updateDocument(
                 auth,
-                {userToken}, 
+                {userToken},
                 null,
                 {
                     "currActiveRooms": {
@@ -92,7 +92,7 @@ createRoom.post('/', cors(), function (req, res) {
             if (updateProRes === 1){
                 console.log(`\(PASS\) createRoom: updateProAuth`);
             } else {
-                console.log(`\(FAILED\) createRoom: updateProRes failed to update\n\tres: ${JSON.stringify(updateProRes)}\n\tname: ${roomName}, roomToken: ${roomToken}`); 
+                console.log(`\(FAILED\) createRoom: updateProRes failed to update\n\tres: ${JSON.stringify(updateProRes)}\n\tname: ${roomName}, roomToken: ${roomToken}`);
                 res.send([
                     "createRoomFailed",
                     {
