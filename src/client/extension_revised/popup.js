@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
     }
 
     if (toContinue){
-      let socket = io.connect( 
+      let socket = io.connect(
         "https://vcxtension.herokuapp.com/rooms",{
         query: {
           roomToken: room_token,
@@ -19,19 +19,27 @@ document.addEventListener("DOMContentLoaded", function ()  {
       });
       socket.on("error", msg => {alert(`Something went wrong! ${msg}`);});
       socket.on("initHandshake", (msg) => {
-        if (msg.type === "pass"){ 
+        if (msg.type === "pass"){
           alert(`Congrats you entered the room: ${room_token}`);
 
           const modelPromise = qna.load();
-		  console.log("model loaded")
+
           const input = document.getElementById('question');
+
           const speakerButton = document.getElementById('start-button');
+
           const result = document.getElementById('result');
+
           const main = document.getElementsByTagName("main")[0];
+
           const textButton = document.getElementById('search');
+
           const contextDiv = document.getElementById('result');
+
           const answerDiv = document.getElementById('answer');
+
           const roomname = document.getElementById('roomname');
+
           const userstatus = document.getElementById('usertype');
 
           chrome.storage.local.set({"VCXroomToken": String(msg.payload.roomToken)}, function() {
@@ -53,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
             userstatus.innerHTML = "Speaker";
             chrome.storage.local.set({"VCXspeakerStatus": String(msg.payload.speaker)}, function() {
               console.log('speakerStatus is stored in localstorage.');
-              chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) { //https://meet.google.com/*
+              chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) {
                   chrome.tabs.sendMessage(tabs[0].id, {"message": "start"});
               });
             });
@@ -66,14 +74,23 @@ document.addEventListener("DOMContentLoaded", function ()  {
           const process = async (questionText) => {
             let escalate = false;
             const model = await modelPromise;
+			let transcriptx = "";
             chrome.storage.local.get(['VCXroomTranscript'], function(result) {
-              answers = model.findAnswers(questionText, result.VCXroomTranscript);
-		  });
+              transcriptx = result.VCXroomTranscript;
+            });
+			console.log(transcriptx)
+			const answers = await model.findAnswers(questionText, transcriptx);
+            console.log(answers == []);
+			console.log(answers)
             console.log(answers.slice(0,1));
             answerMaxConfidence = answers.slice(0,1);
-            if (answerMaxConfidence[0].score > 0){ 
+			if (answers[0] == undefined) {
+				answerMaxConfidence = [{text:questionText, score: -1}];
+				console.log(answerMaxConfidence);
+			}
+            if (answerMaxConfidence[0].score > 0){
               answerDiv.innerHTML = answerMaxConfidence.map(answer => answer.text).join('<br><br>');
- 
+              //check if tts
               chrome.storage.local.get(['VCXproStatus'], function(result) {
                 socket.emit("checkStatus", result.VCXproStatus);
               });
@@ -84,10 +101,9 @@ document.addEventListener("DOMContentLoaded", function ()  {
                   speechSynthesis.speak(utterance);
                 }
               });
-
               answerDiv.innerHTML = answerMaxConfidence[0].text;
             } else {
- 
+              //escalate
               chrome.storage.local.get(['VCXproStatus'], function(result) {
                 socket.emit("checkStatus", result.VCXproStatus);
               });
