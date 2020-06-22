@@ -23,12 +23,9 @@ document.addEventListener("DOMContentLoaded", function ()  {
           alert(`Congrats you entered the room: ${room_token}`);
 
           const modelPromise = qna.load();
-          const input = document.getElementById('question');
           const speakerButton = document.getElementById('start-button');
           const result = document.getElementById('result');
-          const main = document.getElementsByTagName("main")[0];
           const textButton = document.getElementById('search');
-          const contextDiv = document.getElementById('result');
           const answerDiv = document.getElementById('answer');
           const roomname = document.getElementById('roomname');
           const userstatus = document.getElementById('usertype');
@@ -52,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
             userstatus.innerHTML = "Speaker";
             chrome.storage.local.set({"VCXspeakerStatus": String(msg.payload.speaker)}, function() {
               console.log('speakerStatus is stored in localstorage.');
-              chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) {
+              chrome.tabs.query({url: "https://meet.google.com/*"}, function(tabs) { //https://meet.google.com/*
                   chrome.tabs.sendMessage(tabs[0].id, {"message": "start"});
               });
             });
@@ -81,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function ()  {
 			}
             if (answerMaxConfidence[0].score > 0){
               answerDiv.innerHTML = answerMaxConfidence.map(answer => answer.text).join('<br><br>');
-              //check if tts
               chrome.storage.local.get(['VCXproStatus'], function(result) {
                 socket.emit("checkStatus", result.VCXproStatus);
               });
@@ -94,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function ()  {
               });
               answerDiv.innerHTML = answerMaxConfidence[0].text;
             } else {
-              //escalate
               chrome.storage.local.get(['VCXproStatus'], function(result) {
                 socket.emit("checkStatus", result.VCXproStatus);
               });
@@ -109,8 +104,8 @@ document.addEventListener("DOMContentLoaded", function ()  {
               });
             }
           };
-
-          let listening = false;
+		  
+		  let listening = false;
           let questionText;
           const SpeechRecognition =
             window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -118,13 +113,11 @@ document.addEventListener("DOMContentLoaded", function ()  {
             const recognition = new SpeechRecognition();
 
             const stop = () => {
-              main.classList.remove("speaking");
               recognition.stop();
               speakerButton.textContent = "Start listening";
             };
 
             const start = () => {
-              main.classList.add("speaking");
               recognition.start();
               speakerButton.textContent = "Stop listening";
             };
@@ -193,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
             });
          },5000);
 
-         socket.on("transcriptUpdateCleared", (transcriptMsg)=>{
+         socket.on("transcriptUpdateCleared", (transcriptMsg)=>{ //global for all users
            chrome.storage.local.set({"VCXroomTranscript": String(transcriptMsg.payload.transcript)}, function() {
                console.log('New Transcript is stored in localstorage.');
            });
