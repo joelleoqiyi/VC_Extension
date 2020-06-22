@@ -10,7 +10,7 @@ var signUp = express.Router()
 var cors = require('cors')
 
 //setting up CORS settings
-var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234']
+var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234', 'http://127.0.0.1:5500']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
