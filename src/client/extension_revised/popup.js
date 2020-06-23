@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
          socket.on("escalationRequestSent", (msg)=>{
            chrome.storage.local.get(['VCXspeakerStatus'], function(result) {
              if (result.VCXspeakerStatus === "true" || result.VCXspeakerStatus === true) {
-               answerDiv.innerHTML = msg.payload;
+               answerDiv.innerHTML = `Someone asked a question: ${msg.payload}`;
              }
            });
          });
