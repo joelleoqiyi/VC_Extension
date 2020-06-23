@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
           const result = document.getElementById('result');
           const textButton = document.getElementById('search');
           const answerDiv = document.getElementById('answer');
+		  const roomname = document.getElementById('roomname');
           const userstatus = document.getElementById('usertype');
 
           chrome.storage.local.set({"VCXroomToken": String(msg.payload.roomToken)}, function() {
