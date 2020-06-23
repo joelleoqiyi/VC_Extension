@@ -2,7 +2,7 @@
 import {queryDocument, newDocument, updateDocument} from '../misc/db'
 import {generateToken} from '../misc/token'
 import {getCurrDate} from '../misc/date'
-import {room, auth} from '../misc/config'
+import {room, auth, whitelistURL} from '../misc/config'
 
 //declaring variables, npm packages
 var express = require('express')
@@ -10,7 +10,7 @@ var createRoom = express.Router()
 var cors = require('cors')
 
 //setting up CORS settings
-var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234', 'http://127.0.0.1:5500']
+var whitelist = whitelistURL; 
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -147,7 +147,7 @@ createRoom.post('/', cors(corsOptions), function (req, res) {
 })
 
 //easter-egg?
-createRoom.get('/easteregg', cors(), function (req, res) {
+createRoom.get('/easteregg', cors(corsOptions), function (req, res) {
     console.log(`\(NEW\) easterEggRequest @ Time: ${getCurrDate(0)}`);
     res.send(`Good Morning!\n\tEasterEgg created at ${getCurrDate(0)}\n\tWell done! Life is hard, and you just made it harder!`);
 })
