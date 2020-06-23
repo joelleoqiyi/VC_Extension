@@ -1,0 +1,27 @@
+{
+    "name": "VCXtension",
+    "version": "1.0.0",
+    "description": "A Google Chrome Extension tool which enables Q&A anytime during a videoconference/webinar.",
+    "manifest_version": 2,
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "icons": {
+      "16": "icon16.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://meet.google.com/*"],
+            "js": ["content.js", "socket.io.js", "jquery.min.js", "tf.min.js", "qna.js"]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "icon_101.png",
+        "default_popup": "popup.html",
+        "default_title": "VCXtension"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "tabs", "storage"
+    ]
+}
