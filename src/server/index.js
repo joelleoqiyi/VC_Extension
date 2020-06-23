@@ -233,7 +233,8 @@ io.of("/rooms").on("connection", (socket) => {
                 let transcript = (res.transcript !== null && res.transcript !== undefined)
                                    ? String(res.transcript)
                                    : ""
-                let tobeUpdated = transcript.concat(updateString);
+                //let tobeUpdated = transcript.concat(updateString);
+                let tobeUpdated = String(updateString);
                 let updateRes = await updateDocument(
                     room,
                     {"roomKey": socket.roomToken},
