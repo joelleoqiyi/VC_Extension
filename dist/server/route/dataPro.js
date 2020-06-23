@@ -24,7 +24,7 @@ exports.dataPro = dataPro;
 var cors = require('cors'); //setting up CORS settings
 
 
-var whitelist = ['http://localhost:1234', 'http://example2.com'];
+var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234', 'http://127.0.0.1:5500'];
 var corsOptions = {
   origin: function origin(_origin, callback) {
     if (whitelist.indexOf(_origin) !== -1) {
@@ -38,7 +38,7 @@ dataPro.use(function timeLog(req, res, next) {
   console.log("(NEW) dataProRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-dataPro.post('/', cors(), function (req, res) {
+dataPro.post('/', cors(corsOptions), function (req, res) {
   var username, password, userToken;
 
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {

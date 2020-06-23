@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function ()  {
     }
 
     if (toContinue){
+      const roomname = document.getElementById('roomname');
+      roomname.innerHTML = "Room is loading...";
       let socket = io.connect(
         "https://vcxtension.herokuapp.com/rooms",{
         query: {
@@ -27,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function ()  {
           const result = document.getElementById('result');
           const textButton = document.getElementById('search');
           const answerDiv = document.getElementById('answer');
-          const roomname = document.getElementById('roomname');
           const userstatus = document.getElementById('usertype');
 
           chrome.storage.local.set({"VCXroomToken": String(msg.payload.roomToken)}, function() {
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function ()  {
               });
             }
           };
-		  
+
 		  let listening = false;
           let questionText;
           const SpeechRecognition =
@@ -191,7 +192,16 @@ document.addEventListener("DOMContentLoaded", function ()  {
                console.log('New Transcript is stored in localstorage.');
            });
          });
-         socket.on("transcriptUpdateFailed", (transcriptMsg)=>{console.log(transcriptMsg)});
+         socket.on("transcriptUpdateFailed", (transcriptMsg)=>{
+           alert(`Something went wrong! ${transcriptMsg.errorMessage}`);
+         });
+         socket.on("escalationRequestSent", (msg)=>{
+           chrome.storage.local.get(['VCXspeakerStatus'], function(result) {
+             if (result.VCXspeakerStatus === "true" || result.VCXspeakerStatus === true) {
+               answerDiv.innerHTML = msg.payload;
+             }
+           });
+         });
         }
       })
     }

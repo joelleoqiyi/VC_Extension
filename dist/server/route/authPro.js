@@ -26,7 +26,7 @@ exports.authPro = authPro;
 var cors = require('cors'); //setting up CORS settings
 
 
-var whitelist = ['http://localhost:1234', 'http://example2.com'];
+var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234', 'http://127.0.0.1:5500'];
 var corsOptions = {
   origin: function origin(_origin, callback) {
     if (whitelist.indexOf(_origin) !== -1) {
@@ -40,7 +40,7 @@ authPro.use(function timeLog(req, res, next) {
   console.log("(NEW) authProRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-authPro.post('/signin', cors(), function (req, res) {
+authPro.post('/signin', cors(corsOptions), function (req, res) {
   var username, password;
 
   if (req.body.username !== undefined && req.body.password !== undefined) {
@@ -139,7 +139,7 @@ authPro.post('/signin', cors(), function (req, res) {
     return console.error("(ERROR) authPro signin:\n\t".concat(err));
   });
 });
-authPro.post('/logout', cors(), function (req, res) {
+authPro.post('/logout', cors(corsOptions), function (req, res) {
   var username, password, userToken;
 
   if (req.body.username !== undefined && req.body.password !== undefined && req.body.userToken !== undefined) {

@@ -26,7 +26,7 @@ exports.createRoom = createRoom;
 var cors = require('cors'); //setting up CORS settings
 
 
-var whitelist = ['http://localhost:1234', 'http://example2.com'];
+var whitelist = ['https://vcxtension-website.herokuapp.com', 'http://localhost:1234', 'http://127.0.0.1:5500'];
 var corsOptions = {
   origin: function origin(_origin, callback) {
     if (whitelist.indexOf(_origin) !== -1) {
@@ -41,7 +41,7 @@ createRoom.use(function timeLog(req, res, next) {
   console.log("(NEW) createRoomRequest @ Time: ".concat((0, _date.getCurrDate)(0)));
   next();
 });
-createRoom.post('/', cors(), function (req, res) {
+createRoom.post('/', cors(corsOptions), function (req, res) {
   var roomName;
   var transcript = req.body.transcript || "";
   var proStatus = req.body.proStatus === "true" ? true : false;
