@@ -7,7 +7,7 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 ### src/client 
 - src/client/CLIENT\_TEST/\*: testing files for extension
 - src/client/extension/\*: second final draft of extension 
-- src/client/JS\ SST/\*: for the speech-to-text, text-to-speech features of the extension
+- src/client/JS SST/\*: for the speech-to-text, text-to-speech features of the extension
 - src/client/readCaptions/\*: source files to be injected into Google Meet by the extension
 
 ### src/server
