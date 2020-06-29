@@ -4,11 +4,11 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 --- 
 
 ## Directory: 
-### src/client
-- src/client/popup.html is the html for the popup at the side when users click the icon
-- src/client/popup.js is the js for popup.html, it should be where the speech-to-text, text-to-speech is at? 
-- src/client/content.js is the js which will be injected into the current site. (dont think we need this for now)
-- src/client/background.js is the js which is working in the background of each site, it should be where the [socket.io](https://socket.io) connection with the server is located? 
+### src/client 
+- src/client/CLIENT\_TEST/\*: testing files for extension
+- src/client/extension/\*: second final draft of extension 
+- src/client/JS\ SST/\*: for the speech-to-text, text-to-speech features of the extension
+- src/client/readCaptions/\*: source files to be injected into Google Meet by the extension
 
 ### src/server
 - src/server/index.js: main executable (socket.io event listeners)
@@ -22,35 +22,6 @@ A Google Chrome Extension tool which enables Q&amp;A anytime during a videoconfe
 - src/server/route/dataPro.js: routing for getting data of PRO users acc
 - src/server/route/signUp.js: routing for signing up as a new PRO user
 - src/server/CLIENT\_TEST/\*: testing files for client-end (example usage of server events) 
-
----
-
-## Server-side events:
-### /rooms
-- `initHandShake`: initial data transfer from server to client(ALL)
-- `escalationRequestCleared`: escalation/query has been sent (ALL)
-- `escalationRequestSent`: receive escalation/query (SPEAKER ONLY)
-- `escalationRequestFailed`: escalation was unsuccessful, check value of `type` in response for reason (ALL) 
-- `transcriptUpdateCleared`: update of transcript was successful (SPEAKER ONLY)
-- `transcriptUpdateFailed`: updating was unsuccessful, check value of `type` in response for reason (ALL)
-- `checkStatusCleared`: user is proStatus = true
-- `checkStatusFailed`: user is proStatus = false
-- `speakerEnteredCleared`: speaker entered room (ALL)
-- `speakerEnteredFailed`: database failed to update speaker's entry (SPEAKER ONLY)
-### /auth
-- `authProSigninCleared`: authentication for pro users has succeeded, pro user signed in (WEBSITE)
-- `authProSigninFailed`: authentication for pro users failed, check value of `type` in response for reason (WEBSITE)
-- `authProLogoutCleared`: log out for pro users has succeeded (WEBSITE)
-- `authProLogoutFailed`: log out for pro users failed, check value of `type` in response for reason (WEBSITE)
-### /create
-- `createRoomCleared`: user created room successfully (WEBSITE); if userToken + username + password is incorrect, non-PRO room created (WEBSITE)
-- `createRoomFailed`: user room failed to create, check value of `type` in response for reason (WEBSITE)
-### /data
-- `dataProCleared`: fetching pro data is successful, outputting an array of user's currently active rooms
-- `dataProFailed`: fetch of pro data failed, check value of `type` in response for reason (WEBSITE) 
-### /register
-- `signUpCleared`: user sucessfully create new PRO account (WEBSITE)
-- `signUpFailed`: user failed to create new PRO account, check value of `type` in response for reason (WEBSITE)
 
 ---
 
